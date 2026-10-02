@@ -22,7 +22,7 @@
   const BASE_TITLE = 'Caner Mutlu';
 
   /* ================= THEME ================= */
-  const THEMES = ['light', 'dark', 'playful'];
+  const THEMES = ['light', 'dark', 'pop'];
   let theme = {};
   const cssVar = n => getComputedStyle(root).getPropertyValue(n).trim();
   function readTheme() {

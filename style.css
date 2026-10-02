@@ -1,8 +1,8 @@
 :root[data-theme="light"]{--bg-color:#F3F0E9;--text-color:#1E1C1C;--accent-color:#8B0A22;--panel-bg:#EAE6DD;--card-border:rgba(30,28,28,.3);--tetris-bg:#E5E1D8;--grid-line:rgba(30,28,28,.1);
 --p1:#8B0A22;--p2:#C9A227;--p3:#2F5D50;--p4:#D9825B;--p5:#5B7DB1;--p6:#7A4E8C;--p7:#1E1C1C}
-:root[data-theme="dark"]{--bg-color:#14110F;--text-color:#EDE7DC;--accent-color:#FF6B35;--panel-bg:#1D1916;--card-border:rgba(237,231,220,.3);--tetris-bg:#1A1613;--grid-line:rgba(237,231,220,.09);
---p1:#FF6B35;--p2:#F5D547;--p3:#6FD08C;--p4:#5CC8E8;--p5:#8FA2FF;--p6:#C79BFF;--p7:#EDE7DC}
-:root[data-theme="playful"]{--bg-color:#2F4BFF;--text-color:#F6F0E4;--accent-color:#FFD60A;--panel-bg:#2740E6;--card-border:rgba(246,240,228,.4);--tetris-bg:#2438D4;--grid-line:rgba(246,240,228,.14);
+:root[data-theme="dark"]{--bg-color:#14110F;--text-color:#EDE7DC;--accent-color:#7FE0B0;--panel-bg:#1D1916;--card-border:rgba(237,231,220,.3);--tetris-bg:#1A1613;--grid-line:rgba(237,231,220,.09);
+--p1:#FF6B35;--p2:#F5D547;--p3:#F09BA8;--p4:#5CC8E8;--p5:#8FA2FF;--p6:#C79BFF;--p7:#EDE7DC}
+:root[data-theme="pop"]{--bg-color:#2F4BFF;--text-color:#F6F0E4;--accent-color:#FFD60A;--panel-bg:#2740E6;--card-border:rgba(246,240,228,.4);--tetris-bg:#2438D4;--grid-line:rgba(246,240,228,.14);
 --p1:#FFD60A;--p2:#F6F0E4;--p3:#FF7A59;--p4:#7CF5C0;--p5:#FF9EC4;--p6:#C3B1FF;--p7:#0B1450}
 
 :root{--pad:clamp(1.25rem,5vw,5rem)}
