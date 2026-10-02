@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home \\ Caner Mutlu</title>
+<meta name="description" content="Graphic designer in Izmir: pop-up books and cards, print and editorial design, and UX/UI.">
+<meta property="og:title" content="Caner Mutlu \\ Graphic Designer">
+<meta property="og:description" content="Pop-up books and cards, print and editorial design, and UX/UI.">
+<meta property="og:type" content="website">
+<!-- <meta property="og:image" content="https://yourdomain.com/assets/og.jpg"> add a 1200x630 image -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="custom-cursor"></div>
+<div id="loader"><div class="loader-text">\\ LOADING</div><div class="loader-bar-container"><div class="loader-bar" id="loader-bar"></div></div></div>
+
+<nav>
+  <a class="nav-logo" href="#">Caner Mutlu<span>.</span></a>
+  <div class="nav-links">
+    <a class="hover-link active-nav" href="#" data-nav="home">HOME</a>
+    <a class="hover-link" href="#work" data-nav="work">WORK</a>
+    <a class="hover-link" href="#play" data-nav="play">PLAY</a>
+    <a class="hover-link" href="#about" data-nav="about">ABOUT</a>
+    <a class="hover-link" href="#contact" data-nav="contact">CONTACT</a>
+    <div class="theme-switcher" role="group" aria-label="Theme">
+      <button class="theme-btn" data-theme-btn="light">LIGHT</button>
+      <button class="theme-btn" data-theme-btn="dark">DARK</button>
+      <button class="theme-btn" data-theme-btn="playful">PLAY</button>
+    </div>
+  </div>
+</nav>
+
+<div class="stage">
+  <main id="home" class="hero">
+    <div class="hero-top">
+      <span>\\ GRAPHIC DESIGNER · IZMIR</span>
+      <span class="avail"><i></i>AVAILABLE FOR PROJECTS &amp; ROLES</span>
+    </div>
+    <div>
+      <h1 class="hero-title">Designing things you can <em class="verb hold">hold</em>, <em class="verb fold" data-text="fold">fold</em>, and <em class="verb click">click</em><span>.</span></h1>
+      <p class="hero-sub">Across pop-up books, print and screens, I care about how a thing is built and how it feels to use.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#work">VIEW SELECTED WORK →</a>
+        <a class="btn ghost" href="#play">TAKE A TETRIS BREAK →</a>
+      </div>
+    </div>
+    <div class="disciplines">
+      <a class="disc" href="#work" data-filter="popup"><b>01</b><strong>Pop-up &amp; Paper</strong><span>Books and cards that fold, lift and surprise.</span><i>→</i></a>
+      <a class="disc" href="#work" data-filter="print"><b>02</b><strong>Print &amp; Editorial</strong><span>Layout, type and form made to be held.</span><i>→</i></a>
+      <a class="disc" href="#work" data-filter="ux"><b>03</b><strong>UX/UI</strong><span>Interfaces with clear structure and a human touch.</span><i>→</i></a>
+    </div>
+  </main>
+
+  <section id="panel-work" class="panel" aria-label="Work">
+    <div class="panel-header"><span>\\ SELECTED WORK</span><a class="close-btn" href="#">[ ESC ] CLOSE ✕</a></div>
+    <div class="panel-content">
+      <h2 class="panel-title reveal" tabindex="-1">Selected work<span>.</span></h2>
+      <div class="chips reveal" id="chips" role="group" aria-label="Filter projects"></div>
+      <div class="work-list" id="work-list"></div>
+    </div>
+  </section>
+
+  <section id="panel-case" class="panel" aria-label="Project">
+    <div class="panel-header"><span>\\ CASE STUDY</span><a class="close-btn" href="#work">[ ESC ] ALL WORK ✕</a></div>
+    <div class="panel-content" id="case-body"></div>
+  </section>
+
+  <section id="panel-play" class="panel" aria-label="Play">
+    <div class="panel-header"><span>\\ PLAY</span><a class="close-btn" href="#">[ ESC ] CLOSE ✕</a></div>
+    <div class="panel-content">
+      <h2 class="panel-title reveal" tabindex="-1">Take a break<span>.</span></h2>
+      <p class="lede reveal">I love Tetris, so I gave it a spot here. Pause the portfolio, stack a few lines, and come back to the work whenever you like. It's also a small lesson in grids and constraints, which is most of what I do all day.</p>
+      <div class="lab-container reveal">
+        <div class="tetris-wrapper">
+          <canvas id="tetris-canvas" aria-label="Tetris board"></canvas>
+          <div class="touch-controls">
+            <button class="touch-btn" id="t-left" aria-label="Move left">◀</button>
+            <button class="touch-btn" id="t-rot" aria-label="Rotate">↻</button>
+            <button class="touch-btn" id="t-right" aria-label="Move right">▶</button>
+            <button class="touch-btn" id="t-hold">HOLD</button>
+            <button class="touch-btn wide" id="t-drop">▼ DROP</button>
+          </div>
+        </div>
+        <div class="tetris-sidebar">
+          <div class="tetris-panel">
+            <h3>Score</h3>
+            <div class="stat-row"><span>SCORE</span><span id="tetris-score">0</span></div>
+            <div class="stat-row"><span>LINES</span><span id="tetris-lines">0</span></div>
+            <div class="stat-row"><span>LEVEL</span><span id="tetris-level">1</span></div>
+            <div class="stat-row"><span>BEST</span><span id="tetris-best">0</span></div>
+            <button class="tetris-btn" id="tetris-start-btn">START GAME</button>
+          </div>
+          <div class="previews">
+            <div class="tetris-panel"><h3>Next</h3><canvas id="next-canvas"></canvas></div>
+            <div class="tetris-panel"><h3>Hold</h3><canvas id="hold-canvas"></canvas></div>
+          </div>
+          <div class="tetris-panel">
+            <h3>Controls</h3>
+            <p class="small">Arrows / WASD move and rotate<br>Space hard drop<br>C hold · P pause</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-about" class="panel" aria-label="About">
+    <div class="panel-header"><span>\\ ABOUT</span><a class="close-btn" href="#">[ ESC ] CLOSE ✕</a></div>
+    <div class="panel-content">
+      <h2 class="panel-title reveal" tabindex="-1">Made by hand, then refined<span>.</span></h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>I'm a graphic designer based in Izmir. I design pop-up books and cards, print and editorial projects, and digital interfaces, and I'm just as happy folding paper as I am structuring a UX/UI flow.</p>
+          <br>
+          <p>What connects it all is clarity. A pop-up should open with one pull, a page should be easy to read, and a screen shouldn't need instructions.</p>
+        </div>
+        <div class="reveal">
+          <div class="tool-highlight">
+            <span>\\ HOW I WORK</span><br><br>
+            <span>01</span> Build the mechanism in plain paper until it works.<br><span>02</span> Redraw each part digitally and design the graphics on it.<br><span>03</span> Print the parts, cut them out and assemble the piece by hand.<br><br>My UX/UI work follows the same order: structure first, visual design on top.
+          </div>
+          <div class="tool-highlight">
+            <span>\\ I DO</span><br><br>
+            Pop-up books and cards<br>Print and editorial design<br>UX/UI design<br>Photography
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="panel-contact" class="panel" aria-label="Contact">
+    <div class="panel-header"><span>\\ CONTACT</span><a class="close-btn" href="#">[ ESC ] CLOSE ✕</a></div>
+    <div class="panel-content">
+      <h2 class="panel-title reveal" tabindex="-1" style="margin-bottom:1rem">Let's make something<span>.</span></h2>
+      <p class="lede reveal">I'm open to new projects and design roles. Tell me what you're working on.</p>
+      <a href="mailto:hello@idesigner.studio" class="contact-huge reveal">hello@idesigner<br>.studio ↗</a>
+      <div class="contact-actions reveal">
+        <button class="btn" id="copy-email">COPY EMAIL</button>
+        <a class="btn ghost" href="assets/cv.pdf" download>DOWNLOAD CV ↓</a>
+      </div>
+      <div class="socials reveal">
+        <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+        <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener">BEHANCE ↗</a>
+        <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="thumbnail-preview"></div>
+</div>
+
+<footer>
+  <span>\\ © <span id="year"></span></span>
+  <span class="foot-links">
+    <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN</a>
+    <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener">BEHANCE</a>
+    <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a class="hover-link" href="#play" id="foot-best"></a>
+  </span>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
