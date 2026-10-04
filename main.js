@@ -11,6 +11,7 @@
   // Add `img: 'assets/your-image.jpg'` to a project once you have real images.
   // `process: ['assets/a.jpg', ...]` fills the process grid on the case study.
   const CATS = { popup: 'Pop-up & Paper', print: 'Print & Editorial', ux: 'UX/UI' };
+  const STAMPS = { popup: 'POP-UP', print: 'PRINT', ux: 'UX/UI' };
   const WORK = [
     { slug: 'spatial-editorial', name: 'Spatial Editorial', type: 'Print & Form', cat: 'print', year: '2026', role: 'Design', tools: 'Add tools', color: '#8B0A22', problem: 'One line: the problem this project set out to solve.' },
     { slug: 'system-constraints', name: 'System Constraints', type: 'UX/UI', cat: 'ux', year: '2026', role: 'Design', tools: 'Add tools', color: '#1E1C1C', problem: 'One line: the problem this project set out to solve.' },
@@ -60,7 +61,7 @@
     if (!cursorOn) { cursorOn = true; cx = mx; cy = my; document.body.classList.add('has-cursor', 'cursor-ready'); }
   });
   document.addEventListener('mouseover', e => {
-    document.body.classList.toggle('hovering', !!e.target.closest('a, button, .row'));
+    document.body.classList.toggle('hovering', !!e.target.closest('a:not(.verb), button, .row'));
     const t = e.target.closest('[data-cursor]');
     cursor.textContent = t ? t.dataset.cursor : '';
     document.body.classList.toggle('cursor-label', !!t);
@@ -88,7 +89,7 @@
     renderChips();
     const list = WORK.filter(w => filter === 'all' || w.cat === filter);
     $('#work-list').innerHTML = list.map((w, i) =>
-      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}" data-cursor="VIEW"><span class="row-thumb" style="background:${w.img ? `url('${w.img}') center/cover` : w.color}"></span><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="type">${w.type}</span></a>`).join('');
+      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}" data-cursor="VIEW"><span class="row-thumb" style="background:${w.img ? `url('${w.img}') center/cover` : w.color}"></span><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="stamp">${STAMPS[w.cat]}</span></a>`).join('');
     stagger($$('#work-list .row'));
     $$('#work-list .row').forEach(r => {
       r.addEventListener('mouseenter', e => showThumb(e, WORK.find(w => w.slug === r.dataset.slug)));
