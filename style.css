@@ -93,7 +93,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .panel-header{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:500;padding-bottom:1.5rem;border-bottom:2px solid var(--text-color);margin-bottom:2.5rem}
 .close-btn:hover{color:var(--accent-color)}
 .panel-content{max-width:1100px;margin:0 auto;padding-bottom:3rem}
-.panel-title{font-family:'Caprasimo',serif;font-weight:400;font-size:clamp(2.2rem,4vw,3.8rem);margin-bottom:1.5rem;line-height:1.1}
+.panel-title{font-family:'Caprasimo',serif;font-weight:400;font-size:clamp(2rem,4.6vw,4.75rem);margin-bottom:2rem;line-height:1.08}
 .panel-title span{color:var(--accent-color)}
 .lede{max-width:640px;font-size:1.05rem;line-height:1.65;margin-bottom:2.5rem}
 .small{font-size:.85rem;line-height:1.7}
@@ -143,7 +143,6 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .touch-btn:active{background:var(--accent-color);color:var(--bg-color)}
 .touch-btn.wide{grid-column:span 2}
 
-#panel-about .panel-title{font-size:clamp(2rem,4.6vw,4.75rem);line-height:1.08;margin-bottom:2rem}
 .about-intro{max-width:620px;font-size:1.05rem;line-height:1.65}
 .about-intro p+p{margin-top:1.25rem}
 .inline-link{border-bottom:2px solid var(--accent-color);transition:color .2s}
@@ -152,7 +151,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .about-cards .tool-highlight{margin:0}
 .tool-highlight{font-size:.9rem;line-height:1.7;padding:1.5rem;border:2px solid var(--text-color);margin-bottom:2rem;box-shadow:6px 6px 0 var(--text-color);background:var(--panel-bg)}
 .tool-highlight span{color:var(--accent-color);font-weight:600}
-.contact-huge{display:inline-block;font-family:'Caprasimo',serif;font-size:clamp(2.2rem,6vw,6.5rem);line-height:1.1;transition:color .3s;margin-bottom:2rem}
+.contact-huge{display:inline-block;font-family:'Caprasimo',serif;font-size:clamp(1.3rem,3.2vw,2.5rem);line-height:1.2;overflow-wrap:anywhere;transition:color .3s;margin-bottom:2rem}
 .contact-huge:hover{color:var(--accent-color)}
 .socials{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2.5rem;font-size:.85rem}
 
