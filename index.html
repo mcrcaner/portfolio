@@ -21,7 +21,8 @@
 
 <nav>
   <a class="nav-logo" href="#">Caner Mutlu<span>.</span></a>
-  <div class="nav-links">
+  <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">MENU</button>
+  <div class="nav-links" id="nav-links">
     <a class="hover-link active-nav" href="#" data-nav="home">HOME</a>
     <a class="hover-link" href="#work" data-nav="work">WORK</a>
     <a class="hover-link" href="#play" data-nav="play">PLAY</a>
@@ -43,16 +44,16 @@
     </div>
     <div>
       <h1 class="hero-title">Designing things you can <em class="verb hold">hold</em>, <em class="verb fold" data-text="fold">fold</em>, and <em class="verb click">click</em><span>.</span></h1>
-      <p class="hero-sub">Across pop-up books, print and screens, I care about how a thing is built and how it feels to use.</p>
+      <p class="hero-sub">Hi, I'm Caner. I make pop-up books, cards, print projects and interfaces.</p>
       <div class="hero-cta">
-        <a class="btn" href="#work">VIEW SELECTED WORK →</a>
-        <a class="btn ghost" href="#play">TAKE A TETRIS BREAK →</a>
+        <a class="btn" href="#work" data-cursor="WORK">VIEW SELECTED WORK →</a>
+        <a class="btn ghost" href="#play" data-cursor="PLAY">TAKE A TETRIS BREAK →</a>
       </div>
     </div>
     <div class="disciplines">
-      <a class="disc" href="#work" data-filter="popup"><b>01</b><strong>Pop-up &amp; Paper</strong><span>Books and cards that fold, lift and surprise.</span><i>→</i></a>
-      <a class="disc" href="#work" data-filter="print"><b>02</b><strong>Print &amp; Editorial</strong><span>Layout, type and form made to be held.</span><i>→</i></a>
-      <a class="disc" href="#work" data-filter="ux"><b>03</b><strong>UX/UI</strong><span>Interfaces with clear structure and a human touch.</span><i>→</i></a>
+      <a class="disc" data-cursor="VIEW" href="#work" data-filter="popup"><b>01</b><strong>Pop-up &amp; Paper</strong><span>Books and cards that fold, lift and surprise.</span><i>→</i></a>
+      <a class="disc" data-cursor="VIEW" href="#work" data-filter="print"><b>02</b><strong>Print &amp; Editorial</strong><span>Layout, type and form made to be held.</span><i>→</i></a>
+      <a class="disc" data-cursor="VIEW" href="#work" data-filter="ux"><b>03</b><strong>UX/UI</strong><span>Interfaces with clear structure and a human touch.</span><i>→</i></a>
     </div>
   </main>
 
@@ -111,23 +112,14 @@
   <section id="panel-about" class="panel" aria-label="About">
     <div class="panel-header"><span>\\ ABOUT</span><a class="close-btn" href="#">[ ESC ] CLOSE ✕</a></div>
     <div class="panel-content">
-      <h2 class="panel-title reveal" tabindex="-1">Made by hand, then refined<span>.</span></h2>
-      <div class="about-grid">
-        <div class="reveal">
-          <p>I'm a graphic designer based in Izmir. I design pop-up books and cards, print and editorial projects, and digital interfaces, and I'm just as happy folding paper as I am structuring a UX/UI flow.</p>
-          <br>
-          <p>What connects it all is clarity. A pop-up should open with one pull, a page should be easy to read, and a screen shouldn't need instructions.</p>
-        </div>
-        <div class="reveal">
-          <div class="tool-highlight">
-            <span>\\ HOW I WORK</span><br><br>
-            <span>01</span> Build the mechanism in plain paper until it works.<br><span>02</span> Redraw each part digitally and design the graphics on it.<br><span>03</span> Print the parts, cut them out and assemble the piece by hand.<br><br>My UX/UI work follows the same order: structure first, visual design on top.
-          </div>
-          <div class="tool-highlight">
-            <span>\\ I DO</span><br><br>
-            Pop-up books and cards<br>Print and editorial design<br>UX/UI design<br>Photography
-          </div>
-        </div>
+      <h2 class="panel-title reveal" tabindex="-1">About me<span>.</span></h2>
+      <div class="about-intro reveal">
+        <p>I'm a graphic designer based in Izmir. I make pop-up books and cards, print and editorial projects, and digital interfaces. I'm just as happy folding paper as I am working out a UX/UI flow.</p>
+        <p>When I'm not designing, I'm probably playing Tetris. There's a board on the <a class="inline-link" href="#play">Play page</a> if you want to try.</p>
+      </div>
+      <div class="about-cards reveal">
+        <div class="tool-highlight"><span>\\ HOW A POP-UP GETS MADE</span><br><br>A pop-up starts as a rough paper model. I fold and cut until the mechanism works. Then I redraw the parts on the computer, design the artwork on them, print everything and put it together by hand.</div>
+        <div class="tool-highlight"><span>\\ WHAT I MAKE</span><br><br>Pop-up books and cards<br>Print and editorial design<br>UX/UI design<br>Photography</div>
       </div>
     </div>
   </section>
@@ -137,15 +129,14 @@
     <div class="panel-content">
       <h2 class="panel-title reveal" tabindex="-1" style="margin-bottom:1rem">Let's make something<span>.</span></h2>
       <p class="lede reveal">I'm open to new projects and design roles. Tell me what you're working on.</p>
-      <a href="mailto:hello@idesigner.studio" class="contact-huge reveal">hello@idesigner<br>.studio ↗</a>
+      <a href="mailto:hello@idesigner.studio" class="contact-huge reveal" data-cursor="EMAIL">hello@idesigner<br>.studio ↗</a>
       <div class="contact-actions reveal">
-        <button class="btn" id="copy-email">COPY EMAIL</button>
-        <a class="btn ghost" href="assets/cv.pdf" download>DOWNLOAD CV ↓</a>
+        <button class="btn" id="copy-email" data-cursor="COPY">COPY EMAIL</button>
       </div>
       <div class="socials reveal">
-        <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN ↗</a>
-        <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener">BEHANCE ↗</a>
-        <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+        <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener" data-cursor="OPEN">LINKEDIN ↗</a>
+        <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener" data-cursor="OPEN">BEHANCE ↗</a>
+        <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener" data-cursor="OPEN">INSTAGRAM ↗</a>
       </div>
     </div>
   </section>
@@ -156,10 +147,10 @@
 <footer>
   <span>\\ © <span id="year"></span></span>
   <span class="foot-links">
-    <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN</a>
-    <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener">BEHANCE</a>
-    <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener">INSTAGRAM</a>
-    <a class="hover-link" href="#play" id="foot-best"></a>
+    <a class="hover-link" href="https://www.linkedin.com/" target="_blank" rel="noopener" data-cursor="OPEN">LINKEDIN</a>
+    <a class="hover-link" href="https://www.behance.net/" target="_blank" rel="noopener" data-cursor="OPEN">BEHANCE</a>
+    <a class="hover-link" href="https://www.instagram.com/" target="_blank" rel="noopener" data-cursor="OPEN">INSTAGRAM</a>
+    <a class="hover-link" href="#play" id="foot-best" data-cursor="PLAY"></a>
   </span>
 </footer>
 <script src="main.js"></script>

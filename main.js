@@ -37,7 +37,20 @@
     readTheme();
     if (typeof draw === 'function') { draw(); drawPreviews(); }
   }
-  $$('.theme-btn').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.themeBtn)));
+  function changeTheme(name, btn) {
+    if (name === root.getAttribute('data-theme')) return;
+    if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) return setTheme(name);
+    const r = btn.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    root.classList.add('vt-active');
+    const t = document.startViewTransition(() => setTheme(name));
+    t.ready.then(() => root.animate(
+      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
+      { duration: 700, easing: 'cubic-bezier(.85,0,.15,1)', pseudoElement: '::view-transition-new(root)' }
+    ));
+    t.finished.finally(() => root.classList.remove('vt-active'));
+  }
+  $$('.theme-btn').forEach(b => b.addEventListener('click', () => changeTheme(b.dataset.themeBtn, b)));
 
   /* ================= CURSOR ================= */
   const cursor = $('#custom-cursor');
@@ -46,7 +59,12 @@
     mx = e.clientX; my = e.clientY;
     if (!cursorOn) { cursorOn = true; cx = mx; cy = my; document.body.classList.add('has-cursor', 'cursor-ready'); }
   });
-  document.addEventListener('mouseover', e => document.body.classList.toggle('hovering', !!e.target.closest('a, button, .row')));
+  document.addEventListener('mouseover', e => {
+    document.body.classList.toggle('hovering', !!e.target.closest('a, button, .row'));
+    const t = e.target.closest('[data-cursor]');
+    cursor.textContent = t ? t.dataset.cursor : '';
+    document.body.classList.toggle('cursor-label', !!t);
+  });
 
   /* ================= LOADER ================= */
   (() => {
@@ -70,7 +88,7 @@
     renderChips();
     const list = WORK.filter(w => filter === 'all' || w.cat === filter);
     $('#work-list').innerHTML = list.map((w, i) =>
-      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="type">${w.type}</span></a>`).join('');
+      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}" data-cursor="VIEW"><span class="row-thumb" style="background:${w.img ? `url('${w.img}') center/cover` : w.color}"></span><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="type">${w.type}</span></a>`).join('');
     stagger($$('#work-list .row'));
     $$('#work-list .row').forEach(r => {
       r.addEventListener('mouseenter', e => showThumb(e, WORK.find(w => w.slug === r.dataset.slug)));
@@ -97,6 +115,7 @@
   function renderCase(w) {
     const ph = (src, label, cls = '') => src ? `<div class="ph ${cls}"><img src="${src}" alt="${w.name}: ${label}"></div>` : `<div class="ph ${cls}" style="--c:${w.color}">${label}</div>`;
     const proc = w.process || [];
+    const idx = WORK.indexOf(w), prev = WORK[(idx - 1 + WORK.length) % WORK.length], next = WORK[(idx + 1) % WORK.length];
     $('#case-body').innerHTML = `
       <a class="back reveal" href="#work">← ALL WORK</a>
       <h2 class="panel-title reveal" tabindex="-1">${w.name}<span>.</span></h2>
@@ -106,14 +125,20 @@
         <div><dt>TOOLS</dt><dd>${w.tools}</dd></div><div><dt>CATEGORY</dt><dd>${CATS[w.cat]}</dd></div>
       </dl>
       <div class="reveal">${ph(w.img, 'HERO IMAGE', 'hero-img')}</div>
-      <div class="ph-grid reveal">${[0, 1, 2].map(i => ph(proc[i], 'PROCESS 0' + (i + 1))).join('')}</div>`;
+      <div class="ph-grid reveal">${[0, 1, 2].map(i => ph(proc[i], 'PROCESS 0' + (i + 1))).join('')}</div>
+      <div class="case-nav reveal"><a class="case-link" href="#work/${prev.slug}" data-cursor="PREV"><small>← PREVIOUS</small><span>${prev.name}</span></a><a class="case-link next" href="#work/${next.slug}" data-cursor="NEXT"><small>NEXT →</small><span>${next.name}</span></a></div>`;
     stagger($$('#case-body .reveal'));
   }
 
   /* ================= ROUTER (hash based) ================= */
   const VIEWS = { work: 'Work', play: 'Play', about: 'About', contact: 'Contact' };
   const home = $('#home');
-  let current = null, currentView = 'home';
+  const navEl = $('nav'), menuBtn = $('#menu-btn');
+  function setMenu(open) { navEl.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open); menuBtn.textContent = open ? 'CLOSE' : 'MENU'; }
+  menuBtn.addEventListener('click', () => setMenu(!navEl.classList.contains('open')));
+  $$('#nav-links a, .nav-logo').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  let current = null, currentView = 'home', pageTitle = document.title;
 
   function route() {
     const [v, slug] = location.hash.slice(1).split('/');
@@ -123,6 +148,7 @@
     const key = panelId + (item ? item.slug : '');
     if (key === current) return;
     current = key;
+    setMenu(false);
     if (currentView === 'play' && view !== 'play' && state === 'run') state = 'pause'; // auto-pause when leaving
     currentView = view;
     const prev = $('.panel.active');
@@ -133,6 +159,7 @@
     if (prev && panelId !== 'home' && prev.id !== 'panel-' + panelId) { prev.classList.add('leaving'); setTimeout(() => prev.classList.remove('leaving'), 800); }
     $$('nav [data-nav]').forEach(a => a.classList.toggle('active-nav', a.dataset.nav === view));
     document.title = `${item ? item.name : (VIEWS[view] || 'Home')} \\\\ ${BASE_TITLE}`;
+    pageTitle = document.title;
     if (view === 'play') { draw(); drawPreviews(); }
     const h = panelId !== 'home' && $(`#panel-${panelId} h2`);
     if (h) setTimeout(() => h.focus({ preventScroll: true }), 80);
@@ -283,7 +310,10 @@
     draw();
   });
   addEventListener('keyup', e => { if (currentView === 'play' && e.key === ' ') e.preventDefault(); });
-  document.addEventListener('visibilitychange', () => { if (document.hidden && state === 'run') { state = 'pause'; draw(); } });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { if (state === 'run') { state = 'pause'; draw(); document.title = 'Paused \\\\ come back'; } }
+    else document.title = pageTitle;
+  });
 
   /* ================= CONTACT ================= */
   const copyBtn = $('#copy-email');
@@ -310,5 +340,11 @@
   renderWork(); updateStats(); nextIdx = takeBag(); drawPreviews(); draw();
   $$('.panel .reveal').forEach(el => { if (!el.closest('#case-body')) el.style.setProperty('--i', [...el.parentNode.children].indexOf(el)); });
   route();
+  // touch screens have no hover, so play the three hero effects once, one after another
+  if (matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    ['hold', 'fold', 'click'].forEach((v, i) => setTimeout(() => {
+      const el = $('.verb.' + v); el.classList.add('demo'); setTimeout(() => el.classList.remove('demo'), 1100);
+    }, 2300 + i * 1000));
+  }
   requestAnimationFrame(frame);
 })();
