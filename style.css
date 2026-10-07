@@ -56,7 +56,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 @keyframes pulse{50%{opacity:.25}}
 .hero-title{font-family:'Caprasimo',serif;font-weight:400;font-size:clamp(2rem,4.6vw,4.75rem);line-height:1.25;letter-spacing:-.02em;max-width:980px;margin-bottom:2rem}
 .hero-title .verb{font-style:normal;color:var(--accent-color)}
-.hero-title span{color:var(--accent-color)}
+.hero-title>span{color:var(--accent-color)}
 .hero-sub{max-width:620px;font-size:1.05rem;line-height:1.65;margin-bottom:2.5rem}
 /* hero verbs: each word acts out its meaning on hover */
 .verb{position:relative;display:inline-block}
