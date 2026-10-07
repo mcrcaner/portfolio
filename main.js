@@ -8,16 +8,171 @@
   };
 
   /* ================= CONTENT (edit here) ================= */
-  // Add `img: 'assets/your-image.jpg'` to a project once you have real images.
-  // `process: ['assets/a.jpg', ...]` fills the process grid on the case study.
-  const CATS = { popup: 'Pop-up & Paper', print: 'Print & Editorial', ux: 'UX/UI' };
-  const STAMPS = { popup: 'POP-UP', print: 'PRINT', ux: 'UX/UI' };
+  // Each project: slug, name, cat, year, role, tools, color, problem (one line), img (cover image).
+  // `cat` can be one category ('print') or several (['print', 'popup', 'ux']).
+  // `content` is the project page below the cover, shown in order. Each item is ONE of:
+  //   { heading: 'Title' }   { text: 'A paragraph.' }   { image: 'assets/x.jpg', caption: '...' }
+  //   { download: 'assets/fonts/x.ttf', label: 'DOWNLOAD', note: 'optional' }   { specimen: { font: 'FontName' } }
+  //   (an image item can also have width: '560px' to make it smaller)
+  //   Add hero: false to a project to hide its big cover image at the top of the page.
+  //   { images: ['a.jpg', 'b.jpg', 'c.jpg'] }   { vimeo: 'https://vimeo.com/123456789' }
+  //   { figma: 'https://www.figma.com/proto/...', ratio: '9/16', width: '420px' }  (ratio and width are optional)
+  // Any item can also have a `caption`. Use quotes carefully: write "Caner's" with double quotes.
+  const CATS = { popup: 'Pop-up & Paper', print: 'Print & Editorial', ux: 'UX/UI', type: 'Type & Lettering' };
+  const STAMPS = { popup: 'POP-UP', print: 'PRINT', ux: 'UX/UI', type: 'TYPE' };
+  const cats = w => [].concat(w.cat);
   const WORK = [
-    { slug: 'spatial-editorial', name: 'Spatial Editorial', type: 'Print & Form', cat: 'print', year: '2026', role: 'Design', tools: 'Add tools', color: '#8B0A22', problem: 'One line: the problem this project set out to solve.' },
-    { slug: 'system-constraints', name: 'System Constraints', type: 'UX/UI', cat: 'ux', year: '2026', role: 'Design', tools: 'Add tools', color: '#1E1C1C', problem: 'One line: the problem this project set out to solve.' },
-    { slug: 'tactile-interfaces', name: 'Tactile Interfaces', type: 'Interaction Design', cat: 'ux', year: '2025', role: 'Design', tools: 'Add tools', color: '#0055FF', problem: 'One line: the problem this project set out to solve.' },
-    { slug: 'type-and-grid', name: 'Type & Grid', type: 'Typography Systems', cat: 'print', year: '2025', role: 'Design', tools: 'Add tools', color: '#333333', problem: 'One line: the problem this project set out to solve.' },
-    { slug: 'popup-book', name: 'Pop-up Book Architecture', type: 'Paper Engineering', cat: 'popup', year: '2025', role: 'Design, paper engineering', tools: 'Add tools', color: '#B5472B', problem: 'One line: the problem this project set out to solve.' }
+    {
+      slug: 'fandom-house',
+      name: 'Fandom House',
+      cat: ['print', 'popup', 'ux'],   // several categories: use a list
+      year: '2026',
+      role: 'Design, paper engineering',
+      tools: 'Add tools',
+      color: '#8B0A22',
+      problem: 'One line about the whole project.',
+      // img: 'assets/projects/fandom-house/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project.' },
+        { heading: 'The print work' },
+        { text: 'What you made and why.' },
+        // { images: ['assets/projects/fandom-house/print-1.jpg', 'assets/projects/fandom-house/print-2.jpg'] },
+        { heading: 'The pop-up book' },
+        { text: 'How the book works.' },
+        // { vimeo: 'https://vimeo.com/123456789', caption: 'The full book, opened page by page.' },
+        { heading: 'The shopping website' },
+        { text: 'What the site does.' }
+        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
+      ]
+    },
+    {
+      slug: 'zallak',
+      name: 'Zallak',
+      type: 'Typeface',
+      cat: 'type',
+      year: 'Add year',
+      role: 'Type design',
+      tools: 'Add tools',
+      color: '#2F5D50',
+      problem: 'A typeface drawn from a hand-painted apartment sign in Karşıyaka.',
+      img: 'assets/projects/zallak/sign.jpg',   // used for thumbnails
+      hero: false,                               // false = don't show it big at the top of the page
+      content: [
+        { text: 'Zallak began with the hand-painted name signs above the doors of old apartment buildings in Karşıyaka.' },
+        { text: 'One of them, Zallak Ap., had only a few letters to work from. I used those as a starting point and drew the rest of the alphabet in the same style, keeping the spirit of the original lettering and giving it a new digital form.' },
+        { image: 'assets/projects/zallak/sign.jpg', width: '560px', caption: 'The original sign, Zallak Ap., in Karşıyaka.' },
+        { heading: 'Try it' },
+        { text: 'Zallak has uppercase letters only, so whatever you type is set in capitals.' },
+        { specimen: { font: 'Zallak' } },
+        { download: 'assets/fonts/Zallak-Regular.ttf', label: 'DOWNLOAD ZALLAK' }
+        // to add a licence line under the button: { download: '...', label: '...', note: 'Free for personal use.' }
+      ]
+    },
+    {
+      slug: 'spatial-editorial',
+      name: 'Spatial Editorial',
+      type: 'Print & Form',
+      cat: 'print',
+      year: '2026',
+      role: 'Design',
+      tools: 'Add tools',
+      color: '#8B0A22',
+      problem: 'One line: the problem this project set out to solve.',
+      // img: 'assets/projects/spatial-editorial/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project: what it is and why you made it.' },
+        { heading: 'The process' },
+        { text: 'How you got from the first sketches to the final layout.' },
+        // { images: ['assets/projects/spatial-editorial/process-1.jpg', 'assets/projects/spatial-editorial/process-2.jpg', 'assets/projects/spatial-editorial/process-3.jpg'] },
+        { heading: 'The result' },
+        { text: 'What the finished piece looks like and what you learned.' }
+        // { image: 'assets/projects/spatial-editorial/final.jpg', caption: 'The finished piece.' }
+      ]
+    },
+    {
+      slug: 'system-constraints',
+      name: 'System Constraints',
+      type: 'UX/UI',
+      cat: 'ux',
+      year: '2026',
+      role: 'Design',
+      tools: 'Add tools',
+      color: '#1E1C1C',
+      problem: 'One line: the problem this project set out to solve.',
+      // img: 'assets/projects/system-constraints/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project: what it is and who it is for.' },
+        { heading: 'The problem' },
+        { text: 'What was not working and what you wanted to change.' },
+        { heading: 'The design' },
+        { text: 'How you solved it: the structure, the flow, the key screens.' }
+        // { images: ['assets/projects/system-constraints/screen-1.jpg', 'assets/projects/system-constraints/screen-2.jpg', 'assets/projects/system-constraints/screen-3.jpg'] },
+        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
+      ]
+    },
+    {
+      slug: 'tactile-interfaces',
+      name: 'Tactile Interfaces',
+      type: 'Interaction Design',
+      cat: 'ux',
+      year: '2025',
+      role: 'Design',
+      tools: 'Add tools',
+      color: '#0055FF',
+      problem: 'One line: the problem this project set out to solve.',
+      // img: 'assets/projects/tactile-interfaces/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project: what it is and who it is for.' },
+        { heading: 'The problem' },
+        { text: 'What was not working and what you wanted to change.' },
+        { heading: 'The design' },
+        { text: 'How you solved it: the structure, the flow, the key screens.' }
+        // { images: ['assets/projects/tactile-interfaces/screen-1.jpg', 'assets/projects/tactile-interfaces/screen-2.jpg', 'assets/projects/tactile-interfaces/screen-3.jpg'] },
+        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
+      ]
+    },
+    {
+      slug: 'type-and-grid',
+      name: 'Type & Grid',
+      type: 'Typography Systems',
+      cat: 'print',
+      year: '2025',
+      role: 'Design',
+      tools: 'Add tools',
+      color: '#333333',
+      problem: 'One line: the problem this project set out to solve.',
+      // img: 'assets/projects/type-and-grid/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project: what it is and why you made it.' },
+        { heading: 'The process' },
+        { text: 'How you got from the first sketches to the final layout.' },
+        // { images: ['assets/projects/type-and-grid/process-1.jpg', 'assets/projects/type-and-grid/process-2.jpg', 'assets/projects/type-and-grid/process-3.jpg'] },
+        { heading: 'The result' },
+        { text: 'What the finished piece looks like and what you learned.' }
+        // { image: 'assets/projects/type-and-grid/final.jpg', caption: 'The finished piece.' }
+      ]
+    },
+    {
+      slug: 'popup-book',
+      name: 'Pop-up Book Architecture',
+      type: 'Paper Engineering',
+      cat: 'popup',
+      year: '2025',
+      role: 'Design, paper engineering',
+      tools: 'Add tools',
+      color: '#B5472B',
+      problem: 'One line: the problem this project set out to solve.',
+      // img: 'assets/projects/popup-book/cover.jpg',
+      content: [
+        { text: 'A longer introduction to the project: what it is and why you made it.' },
+        { heading: 'The mechanism' },
+        { text: 'How the paper engineering works and how you tested it.' },
+        // { vimeo: 'https://vimeo.com/123456789', caption: 'The book, opened page by page.' },
+        { heading: 'The artwork' },
+        { text: 'How you designed the graphics for each part.' }
+        // { images: ['assets/projects/popup-book/art-1.jpg', 'assets/projects/popup-book/art-2.jpg', 'assets/projects/popup-book/art-3.jpg'] }
+      ]
+    },
   ];
   const EMAIL = 'hello@idesigner.studio';
   const BASE_TITLE = 'Caner Mutlu';
@@ -87,9 +242,9 @@
   }
   function renderWork() {
     renderChips();
-    const list = WORK.filter(w => filter === 'all' || w.cat === filter);
+    const list = WORK.filter(w => filter === 'all' || cats(w).includes(filter));
     $('#work-list').innerHTML = list.map((w, i) =>
-      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}" data-cursor="VIEW"><span class="row-thumb" style="background:${w.img ? `url('${w.img}') center/cover` : w.color}"></span><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="stamp">${STAMPS[w.cat]}</span></a>`).join('');
+      `<a class="row" href="#work/${w.slug}" data-slug="${w.slug}" data-cursor="VIEW"><span class="row-thumb" style="background:${w.img ? `url('${w.img}') center/cover` : w.color}"></span><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${w.name}</span><span class="stamps">${cats(w).map(c => `<span class="stamp">${STAMPS[c]}</span>`).join('')}</span></a>`).join('');
     stagger($$('#work-list .row'));
     $$('#work-list .row').forEach(r => {
       r.addEventListener('mouseenter', e => showThumb(e, WORK.find(w => w.slug === r.dataset.slug)));
@@ -113,22 +268,79 @@
     thumb.classList.toggle('below', e.clientY < 260);
   }
 
+  const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  function vimeoSrc(url) {
+    const u = String(url), m = u.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([a-z0-9]+))?/i) || u.match(/^(\d+)$/);
+    if (!m) return null;
+    const h = m[2] || (u.match(/[?&]h=([a-z0-9]+)/i) || [])[1];
+    return `https://player.vimeo.com/video/${m[1]}?${h ? 'h=' + h + '&' : ''}dnt=1&title=0&byline=0&portrait=0`;
+  }
+  const figmaSrc = url => 'https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(url);
+
+  function renderBlock(b, w) {
+    const cap = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '';
+    const img = src => `<div class="ph"><img src="${src}" alt="${esc(b.caption || w.name)}" loading="lazy"></div>`;
+    if (b.heading) return `<h3 class="case-h reveal">${esc(b.heading)}</h3>`;
+    if (b.text) return `<p class="case-p reveal">${esc(b.text)}</p>`;
+    if (b.image) return `<figure class="case-fig reveal"${b.width ? ` style="max-width:${esc(b.width)}"` : ''}>${img(b.image)}${cap}</figure>`;
+    if (b.images) return `<figure class="case-fig reveal"><div class="ph-grid" style="--n:${Math.min(b.images.length, 3)}">${b.images.map(img).join('')}</div>${cap}</figure>`;
+    if (b.download) return `<div class="case-fig download reveal"><a class="btn" href="${esc(b.download)}" download data-cursor="DOWNLOAD">↓ ${esc(b.label || 'DOWNLOAD')}</a>${b.note ? `<p class="small">${esc(b.note)}</p>` : ''}</div>`;
+    if (b.specimen) {
+      const sp = b.specimen, font = esc(sp.font), text = esc(sp.text || 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG');
+      const glyphs = sp.glyphs || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      return `<div class="specimen case-fig reveal" style="--spec-font:'${font}'" data-font="${font}" data-default="${text}">
+        <div class="spec-big" aria-hidden="true"><span>${esc(sp.title || sp.font).toUpperCase()}</span></div>
+        <div class="spec-tester">
+          <div class="spec-bar"><span>TYPE ANYTHING</span><label>SIZE <input class="spec-size" type="range" min="24" max="160" value="72" aria-label="Font size"></label><button class="spec-reset" type="button">RESET</button></div>
+          <div class="spec-text" contenteditable="true" spellcheck="false" role="textbox" aria-label="Type tester">${text}</div>
+        </div>
+        <div class="spec-glyphs" aria-hidden="true">${[...glyphs].map(g => `<span>${esc(g)}</span>`).join('')}</div>
+      </div>`;
+    }
+    if (b.vimeo || b.figma) {
+      const src = b.vimeo ? vimeoSrc(b.vimeo) : figmaSrc(b.figma);
+      if (!src) return '';
+      const style = `aspect-ratio:${b.ratio || (b.vimeo ? '16/9' : '16/10')};${b.width ? 'max-width:' + esc(b.width) : ''}`;
+      return `<figure class="case-fig reveal"><div class="embed" style="${style}"><iframe src="${src}" loading="lazy" allowfullscreen allow="fullscreen; picture-in-picture" title="${esc(b.caption || w.name)}"></iframe></div>${cap}</figure>`;
+    }
+    return '';
+  }
+
   function renderCase(w) {
-    const ph = (src, label, cls = '') => src ? `<div class="ph ${cls}"><img src="${src}" alt="${w.name}: ${label}"></div>` : `<div class="ph ${cls}" style="--c:${w.color}">${label}</div>`;
-    const proc = w.process || [];
     const idx = WORK.indexOf(w), prev = WORK[(idx - 1 + WORK.length) % WORK.length], next = WORK[(idx + 1) % WORK.length];
+    const blocks = w.content || (w.process && w.process.length ? [{ images: w.process }] : null);
+    const hero = (w.img && w.hero !== false) ? `<div class="ph hero-img"><img src="${w.img}" alt="${esc(w.name)}"></div>`
+      : (blocks ? '' : `<div class="ph hero-img" style="--c:${w.color}">COVER IMAGE</div>`);
+    const body = blocks ? blocks.map(b => renderBlock(b, w)).join('')
+      : `<div class="ph-grid reveal">${[1, 2, 3].map(n => `<div class="ph" style="--c:${w.color}">IMAGE 0${n}</div>`).join('')}</div>`;
     $('#case-body').innerHTML = `
       <a class="back reveal" href="#work">← ALL WORK</a>
       <h2 class="panel-title reveal" tabindex="-1">${w.name}<span>.</span></h2>
       <p class="lede reveal">${w.problem}</p>
       <dl class="meta reveal">
         <div><dt>ROLE</dt><dd>${w.role}</dd></div><div><dt>YEAR</dt><dd>${w.year}</dd></div>
-        <div><dt>TOOLS</dt><dd>${w.tools}</dd></div><div><dt>CATEGORY</dt><dd>${CATS[w.cat]}</dd></div>
+        <div><dt>TOOLS</dt><dd>${w.tools}</dd></div><div><dt>CATEGORY</dt><dd>${cats(w).map(c => CATS[c]).join(', ')}</dd></div>
       </dl>
-      <div class="reveal">${ph(w.img, 'HERO IMAGE', 'hero-img')}</div>
-      <div class="ph-grid reveal">${[0, 1, 2].map(i => ph(proc[i], 'PROCESS 0' + (i + 1))).join('')}</div>
+      ${hero ? `<div class="reveal">${hero}</div>` : ''}
+      ${body}
       <div class="case-nav reveal"><a class="case-link" href="#work/${prev.slug}" data-cursor="PREV"><small>← PREVIOUS</small><span>${prev.name}</span></a><a class="case-link next" href="#work/${next.slug}" data-cursor="NEXT"><small>NEXT →</small><span>${next.name}</span></a></div>`;
     stagger($$('#case-body .reveal'));
+    $$('#case-body .specimen').forEach(sp => {
+      const txt = $('.spec-text', sp), size = $('.spec-size', sp), set = v => sp.style.setProperty('--spec-size', v + 'px');
+      set(size.value);
+      const big = $('.spec-big', sp), word = $('.spec-big span', sp);
+      const fit = () => {
+        big.style.fontSize = '100px';
+        const w = word.getBoundingClientRect().width, avail = sp.clientWidth;
+        if (w > 0 && avail > 0) big.style.fontSize = Math.max(32, Math.min(144, 100 * avail / w * .98)) + 'px';
+      };
+      fit();
+      if (document.fonts && document.fonts.load) document.fonts.load(`100px "${sp.dataset.font}"`).then(fit, () => {});
+      if (window.ResizeObserver) new ResizeObserver(fit).observe(sp);
+      size.addEventListener('input', () => set(size.value));
+      $('.spec-reset', sp).addEventListener('click', () => { txt.textContent = sp.dataset.default; size.value = 72; set(72); });
+      txt.addEventListener('paste', e => { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text')); });
+    });
   }
 
   /* ================= ROUTER (hash based) ================= */
