@@ -69,6 +69,27 @@
       ]
     },
     {
+      slug: 'popup-book',
+      name: 'Macrodata Refiner’s Orientation Pop-Up Booklet',
+      type: 'Paper Engineering',
+      cat: 'popup',
+      year: '2025',
+      role: 'Design, paper engineering',
+      tools: 'Illustrator',
+      color: '#B5472B',
+      problem: 'A pop-up book to welcome newly severed employees at Lumon Industries, inspired by the world of the TV series Severance.',
+      img: 'assets/projects/popup-book/cover.png',
+      content: [
+        { text: 'It is designed carefully so that every piece of information fits what an innie would know: nothing is revealed that they shouldn’t. The text uses Lumon’s company voice, and the pop-up pages bring key experiences to life, like the Music Dance Experience, the ORTBO, and the Melon Bar. The goal was to design a piece that could feel like a real prop from the show.' },
+        { heading: 'Spreads' },
+       // { text: 'How the paper engineering works and how you tested it.' },
+        { vimeo: 'https://vimeo.com/1077771469/895303fd28', caption: 'The book, opened page by page.' },
+        { heading: 'Details' },
+        { text: 'How you designed the graphics for each part.' },
+        { images: ['assets/projects/popup-book/art-1.jpg', 'assets/projects/popup-book/art-2.jpg', 'assets/projects/popup-book/art-3.jpg', 'assets/projects/popup-book/art-4.jpg', 'assets/projects/popup-book/art-5.jpg', 'assets/projects/popup-book/art-6.jpg', 'assets/projects/popup-book/art-7.jpg'] }
+      ]
+    },
+    {
       slug: 'spatial-editorial',
       name: 'Spatial Editorial',
       type: 'Print & Form',
@@ -152,27 +173,7 @@
         // { image: 'assets/projects/type-and-grid/final.jpg', caption: 'The finished piece.' }
       ]
     },
-    {
-      slug: 'popup-book',
-      name: 'Pop-up Book Architecture',
-      type: 'Paper Engineering',
-      cat: 'popup',
-      year: '2025',
-      role: 'Design, paper engineering',
-      tools: 'Add tools',
-      color: '#B5472B',
-      problem: 'One line: the problem this project set out to solve.',
-      // img: 'assets/projects/popup-book/cover.jpg',
-      content: [
-        { text: 'A longer introduction to the project: what it is and why you made it.' },
-        { heading: 'The mechanism' },
-        { text: 'How the paper engineering works and how you tested it.' },
-        // { vimeo: 'https://vimeo.com/123456789', caption: 'The book, opened page by page.' },
-        { heading: 'The artwork' },
-        { text: 'How you designed the graphics for each part.' }
-        // { images: ['assets/projects/popup-book/art-1.jpg', 'assets/projects/popup-book/art-2.jpg', 'assets/projects/popup-book/art-3.jpg'] }
-      ]
-    },
+    
   ];
   const EMAIL = 'hello@idesigner.studio';
   const BASE_TITLE = 'Caner Mutlu';
@@ -277,13 +278,85 @@
   }
   const figmaSrc = url => 'https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(url);
 
+  /* ================= IMAGE GALLERY (lightbox) ================= */
+  let galleries = [], lbState = null;
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Image gallery'); lb.setAttribute('aria-hidden', 'true');
+  lb.innerHTML = `<div class="lb-scrim" data-cursor="CLOSE"></div>
+    <div class="lb-top"><span class="lb-count"></span><button class="lb-close" type="button">[ ESC ] CLOSE ✕</button></div>
+    <button class="lb-nav lb-prev" type="button" aria-label="Previous image">←</button>
+    <figure class="lb-stage"><img class="lb-img" alt=""><figcaption class="lb-cap"></figcaption></figure>
+    <button class="lb-nav lb-next" type="button" aria-label="Next image">→</button>`;
+  document.body.appendChild(lb);
+  const lbImg = $('.lb-img', lb), lbCap = $('.lb-cap', lb), lbCount = $('.lb-count', lb), lbClose = $('.lb-close', lb);
+  const behindLb = () => [$('nav'), $('.stage'), $('footer')];
+
+  function lbShow(i) {
+    const g = lbState.g, n = g.images.length;
+    lbState.i = (i + n) % n;
+    const src = g.images[lbState.i];
+    if (lbImg.getAttribute('src') !== src) {
+      lbImg.style.opacity = 0;
+      lbImg.onload = lbImg.onerror = () => { lbImg.style.opacity = 1; };
+      lbImg.src = src;
+    }
+    lbImg.alt = g.caption || g.name;
+    lbCap.textContent = g.caption;
+    lbCount.textContent = n > 1 ? `${lbState.i + 1} / ${n}` : '';
+    lb.classList.toggle('single', n < 2);
+    [1, -1].forEach(d => { new Image().src = g.images[(lbState.i + d + n) % n]; }); // preload neighbours
+  }
+  function lbOpen(gi, i, trigger) {
+    lbState = { g: galleries[gi], i, trigger };
+    lbShow(i);
+    behindLb().forEach(el => { if (el) el.inert = true; });
+    lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false');
+    lbClose.focus({ preventScroll: true });
+  }
+  function lbDismiss() {
+    if (!lbState) return;
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true');
+    behindLb().forEach(el => { if (el) el.inert = false; });
+    const t = lbState.trigger; lbState = null;
+    if (t && document.contains(t)) t.focus({ preventScroll: true });
+  }
+  $('#case-body').addEventListener('click', e => {
+    const b = e.target.closest('.gal-btn');
+    if (b) lbOpen(+b.dataset.g, +b.dataset.i, b);
+  });
+  $('.lb-scrim', lb).addEventListener('click', lbDismiss);   // click outside the image closes it
+  lbClose.addEventListener('click', lbDismiss);
+  $('.lb-prev', lb).addEventListener('click', () => lbShow(lbState.i - 1));
+  $('.lb-next', lb).addEventListener('click', () => lbShow(lbState.i + 1));
+  // capture phase, so Esc and the arrow keys never reach the page behind the gallery
+  window.addEventListener('keydown', e => {
+    if (!lbState) return;
+    if (e.key === 'Escape') lbDismiss();
+    else if (e.key === 'ArrowLeft') lbShow(lbState.i - 1);
+    else if (e.key === 'ArrowRight') lbShow(lbState.i + 1);
+    else return;
+    e.preventDefault(); e.stopImmediatePropagation();
+  }, true);
+  let lbTouchX = null;   // swipe on touch screens
+  lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (lbTouchX === null || !lbState) return;
+    const dx = e.changedTouches[0].clientX - lbTouchX; lbTouchX = null;
+    if (Math.abs(dx) > 50) lbShow(lbState.i + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
   function renderBlock(b, w) {
     const cap = b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '';
     const img = src => `<div class="ph"><img src="${src}" alt="${esc(b.caption || w.name)}" loading="lazy"></div>`;
     if (b.heading) return `<h3 class="case-h reveal">${esc(b.heading)}</h3>`;
     if (b.text) return `<p class="case-p reveal">${esc(b.text)}</p>`;
     if (b.image) return `<figure class="case-fig reveal"${b.width ? ` style="max-width:${esc(b.width)}"` : ''}>${img(b.image)}${cap}</figure>`;
-    if (b.images) return `<figure class="case-fig reveal"><div class="ph-grid" style="--n:${Math.min(b.images.length, 3)}">${b.images.map(img).join('')}</div>${cap}</figure>`;
+    if (b.images) {
+      const gi = galleries.push({ images: b.images, caption: b.caption || '', name: w.name }) - 1;
+      const thumbs = b.images.map((src, i) => `<div class="ph"><button type="button" class="gal-btn" data-g="${gi}" data-i="${i}" data-cursor="ENLARGE" aria-label="Enlarge image ${i + 1} of ${b.images.length}"><img src="${src}" alt="${esc(b.caption || w.name)}" loading="lazy"></button></div>`).join('');
+      return `<figure class="case-fig reveal"><div class="ph-grid" style="--n:${Math.min(b.images.length, 3)}">${thumbs}</div>${cap}</figure>`;
+    }
     if (b.download) return `<div class="case-fig download reveal"><a class="btn" href="${esc(b.download)}" download data-cursor="DOWNLOAD">↓ ${esc(b.label || 'DOWNLOAD')}</a>${b.note ? `<p class="small">${esc(b.note)}</p>` : ''}</div>`;
     if (b.specimen) {
       const sp = b.specimen, font = esc(sp.font), text = esc(sp.text || 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG');
@@ -300,13 +373,17 @@
     if (b.vimeo || b.figma) {
       const src = b.vimeo ? vimeoSrc(b.vimeo) : figmaSrc(b.figma);
       if (!src) return '';
-      const style = `aspect-ratio:${b.ratio || (b.vimeo ? '16/9' : '16/10')};${b.width ? 'max-width:' + esc(b.width) : ''}`;
+      const ratio = b.ratio || (b.vimeo ? '16/9' : '16/10');
+      const [rw, rh] = ratio.split('/').map(Number), r = (rw / (rh || 1)) || 16 / 9;
+      const maxW = b.width ? esc(b.width) : `min(100%, calc(min(60vh, 520px) * ${r.toFixed(4)}))`; // never taller than the cover image
+      const style = `aspect-ratio:${ratio};max-width:${maxW}`;
       return `<figure class="case-fig reveal"><div class="embed" style="${style}"><iframe src="${src}" loading="lazy" allowfullscreen allow="fullscreen; picture-in-picture" title="${esc(b.caption || w.name)}"></iframe></div>${cap}</figure>`;
     }
     return '';
   }
 
   function renderCase(w) {
+    galleries = [];
     const idx = WORK.indexOf(w), prev = WORK[(idx - 1 + WORK.length) % WORK.length], next = WORK[(idx + 1) % WORK.length];
     const blocks = w.content || (w.process && w.process.length ? [{ images: w.process }] : null);
     const hero = (w.img && w.hero !== false) ? `<div class="ph hero-img"><img src="${w.img}" alt="${esc(w.name)}"></div>`
@@ -354,6 +431,7 @@
   let current = null, currentView = 'home', pageTitle = document.title;
 
   function route() {
+    lbDismiss();
     const [v, slug] = location.hash.slice(1).split('/');
     const view = VIEWS[v] ? v : 'home';
     const item = view === 'work' && slug ? WORK.find(w => w.slug === slug) : null;

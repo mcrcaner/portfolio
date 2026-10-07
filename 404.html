@@ -1,5 +1,4 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Page not found \\ Caner Mutlu</title>
-<meta http-equiv="refresh" content="6; url=/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -9,4 +8,11 @@ h1{font-family:'Caprasimo',serif;font-weight:400;font-size:clamp(2rem,4.6vw,4.75
 h1 span,a{color:#8B0A22}
 p{font-size:1rem;line-height:1.65}
 </style></head>
-<body><div><h1>Lost the fold<span>.</span></h1><p>This page doesn't exist. <a href="/">Back to the start</a>. You'll be redirected in a few seconds.</p></div></body></html>
+<body><div><h1>Lost the fold<span>.</span></h1><p>This page doesn't exist. <a href="/" id="home">Back to the start</a>. You'll be redirected in a few seconds.</p></div>
+<script>
+// works from a project site (/portfolio/) and from a custom domain (/)
+var base = location.pathname.indexOf('/portfolio/') === 0 ? '/portfolio/' : '/';
+document.getElementById('home').href = base;
+setTimeout(function () { location.href = base; }, 6000);
+</script>
+</body></html>
