@@ -28,20 +28,21 @@
       cat: ['print', 'popup', 'ux'],   // several categories: use a list
       year: '2026',
       role: 'Design, paper engineering',
-      tools: 'Add tools',
+      tools: 'Illustrator, Photoshop, HTML, CSS, JS',
       color: '#8B0A22',
-      problem: 'One line about the whole project.',
-      // img: 'assets/projects/fandom-house/cover.jpg',
+      problem: 'A specialized publishing house and its digital storefront dedicated to Sci-Fi universes, focused exclusively on crafting authentic diegetic and in-world merchandise.',
+      img: 'assets/projects/fandom-house/fandomhouse-logo.jpg',
       content: [
         { text: 'A longer introduction to the project.' },
-        { heading: 'The print work' },
-        { text: 'What you made and why.' },
-        // { images: ['assets/projects/fandom-house/print-1.jpg', 'assets/projects/fandom-house/print-2.jpg'] },
-        { heading: 'The pop-up book' },
+        { heading: 'The merchandise' },
+        { text: 'As a publishing house specialized in Sci-Fi universes, Fandom House offers diegetic products ranging from books to CDs. For more detailed info on the products, you can visit the store.' },
+        { images: ['assets/projects/fandom-house/thepact1.jpg', 'assets/projects/fandom-house/thepact2.jpg' , 'assets/projects/fandom-house/optics1.jpg', 'assets/projects/fandom-house/optics2.jpg', 'assets/projects/fandom-house/defiantjazz.png'] },
+        { heading: 'The pop-up cards' },
         { text: 'How the book works.' },
-        // { vimeo: 'https://vimeo.com/123456789', caption: 'The full book, opened page by page.' },
-        { heading: 'The shopping website' },
-        { text: 'What the site does.' }
+        { images: ['assets/projects/fandom-house/portal1.jpg', 'assets/projects/fandom-house/portal2.jpg', 'assets/projects/fandom-house/portal3.jpg', 'assets/projects/fandom-house/portal4.jpg', 'assets/projects/fandom-house/silo1.jpg', 'assets/projects/fandom-house/silo2.jpg', 'assets/projects/fandom-house/fallout1.jpg', 'assets/projects/fandom-house/fallout2.jpg'] },
+        { heading: 'The digital store' },
+        { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
+        { image: 'assets/projects/fandom-house/store.png', width: '560px', caption: 'The digital store.' },
         // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
       ]
     },
@@ -64,8 +65,9 @@
         { heading: 'Try it' },
         { text: 'Zallak has uppercase letters only, so whatever you type is set in capitals.' },
         { specimen: { font: 'Zallak' } },
-        { download: 'assets/fonts/Zallak-Regular.ttf', label: 'DOWNLOAD ZALLAK' }
-        // to add a licence line under the button: { download: '...', label: '...', note: 'Free for personal use.' }
+        { download: 'assets/fonts/Zallak-Regular.ttf', label: 'DOWNLOAD ZALLAK', note: 'Free for personal use.' },
+        
+
       ]
     },
     {
@@ -153,29 +155,29 @@
       ]
     },
     {
-      slug: 'type-and-grid',
-      name: 'Type & Grid',
+      slug: 'miscellaneous',
+      name: 'Miscellaneous',
       type: 'Typography Systems',
-      cat: 'print',
-      year: '2025',
+      cat: ['print', 'popup', 'ux'],
+      year: '2022-',
       role: 'Design',
-      tools: 'Add tools',
+      tools: 'Illustrator, Photoshop, After Effects',
       color: '#333333',
-      problem: 'One line: the problem this project set out to solve.',
+      problem: 'These are some designs that are not part of a bigger project, but I still want to showcase them.',
       // img: 'assets/projects/type-and-grid/cover.jpg',
       content: [
-        { text: 'A longer introduction to the project: what it is and why you made it.' },
-        { heading: 'The process' },
-        { text: 'How you got from the first sketches to the final layout.' },
+      //  { text: 'A longer introduction to the project: what it is and why you made it.' },
+      //  { heading: 'Print' },
+      //  { text: 'Posters, flyers.' },
         // { images: ['assets/projects/type-and-grid/process-1.jpg', 'assets/projects/type-and-grid/process-2.jpg', 'assets/projects/type-and-grid/process-3.jpg'] },
-        { heading: 'The result' },
-        { text: 'What the finished piece looks like and what you learned.' }
+      //  { heading: 'Music Packaging' },
+      //  { text: 'What the finished piece looks like and what you learned.' }
         // { image: 'assets/projects/type-and-grid/final.jpg', caption: 'The finished piece.' }
       ]
     },
     
   ];
-  const EMAIL = 'hello@idesigner.studio';
+  const EMAIL = 'mcrcaner@gmail.com';
   const BASE_TITLE = 'Caner Mutlu';
 
   /* ================= THEME ================= */
