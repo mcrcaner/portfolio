@@ -86,7 +86,7 @@
         { vimeo: 'https://vimeo.com/1077771469/895303fd28', caption: 'The book, opened page by page.' },
         { heading: 'Details' },
         { text: 'How you designed the graphics for each part.' },
-        { images: ['assets/projects/popup-book/art-1.JPG', 'assets/projects/popup-book/art-2.jpg', 'assets/projects/popup-book/art-3.jpg', 'assets/projects/popup-book/art-4.jpg', 'assets/projects/popup-book/art-5.jpg', 'assets/projects/popup-book/art-6.jpg', 'assets/projects/popup-book/art-7.jpg'] }
+        { images: ['assets/projects/popup-book/art-1.JPG', 'assets/projects/popup-book/art-2.JPG', 'assets/projects/popup-book/art-3.JPG', 'assets/projects/popup-book/art-4.JPG', 'assets/projects/popup-book/art-5.JPG', 'assets/projects/popup-book/art-6.JPG', 'assets/projects/popup-book/art-7.JPG'] }
       ]
     },
     {
