@@ -17,6 +17,14 @@
   //   Add hero: false to a project to hide its big cover image at the top of the page.
   //   { images: ['a.jpg', 'b.jpg', 'c.jpg'] }   { vimeo: 'https://vimeo.com/123456789' }
   //   { figma: 'https://www.figma.com/proto/...', ratio: '9/16', width: '420px' }  (ratio and width are optional)
+  
+  //    { links: [
+    //{ url: 'https://your-fandom-house-site.com', label: 'VISIT THE WEBSITE' },
+    //{ url: 'https://another-link.com', label: 'SEE THE PROTOTYPE' }
+    //] }, 
+  // or 
+  // { link: 'https://your-fandom-house-site.com', label: 'VISIT THE WEBSITE', caption: 'optional caption' },
+ 
   // Any item can also have a `caption`. Use quotes carefully: write "Caner's" with double quotes.
   const CATS = { popup: 'Pop-up & Paper', print: 'Print & Editorial', ux: 'UX/UI', type: 'Type & Lettering' };
   const STAMPS = { popup: 'POP-UP', print: 'PRINT', ux: 'UX/UI', type: 'TYPE' };
@@ -43,6 +51,7 @@
         { heading: 'The digital store' },
         { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
         { image: 'assets/projects/fandom-house/store.png', width: '560px', caption: 'The digital store.' },
+        { link: 'https://mcrcaner.github.io/fandom-house/', label: 'VISIT THE WEBSITE', caption: 'Experience the live digital store and gesture navigation.' },
         // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
       ]
     },
@@ -102,6 +111,7 @@
       color: '#0055FF',
       problem: 'A digital experience where you can collect TikTok trends.',
       img: 'assets/projects/toktracks/cover.webp',
+      hero: false,
       content: [
         { text: 'TokTracks is a platform that archives and curates TikTok trends and focusing on the music behind them.' },
         { heading: 'A hub for music and trend discovery' },
@@ -382,6 +392,12 @@
       const style = `aspect-ratio:${ratio};max-width:${maxW}`;
       return `<figure class="case-fig reveal"><div class="embed" style="${style}"><iframe src="${src}" loading="lazy" allowfullscreen allow="fullscreen; picture-in-picture" title="${esc(b.caption || w.name)}"></iframe></div>${cap}</figure>`;
     }
+
+    if (b.link || b.links) {
+      const list = b.links || [{ url: b.link, label: b.label }];
+      return `<figure class="case-fig reveal"><div class="link-row">${list.map(l => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener" data-cursor="OPEN">${esc(l.label || 'VISIT')} ↗</a>`).join('')}</div>${cap}</figure>`;
+    }
+
     return '';
   }
 
