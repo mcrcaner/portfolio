@@ -92,6 +92,28 @@
       ]
     },
     {
+      slug: 'toktracks',
+      name: 'TokTracks',
+      type: 'Interaction Design',
+      cat: 'ux',
+      year: '2024',
+      role: 'Design',
+      tools: 'Figma',
+      color: '#0055FF',
+      problem: 'A digital experience where you can collect TikTok trends.',
+      img: 'assets/projects/toktracks/cover.webp',
+      content: [
+        { text: 'TokTracks is a platform that archives and curates TikTok trends and focusing on the music behind them.' },
+        { heading: 'A hub for music and trend discovery' },
+        { text: 'It allows users to save favorite trends, and view popular conctent and connect with friends, add songs to Spotify or Apple Music, and discover detailed song information such as stream counts.' },
+        { heading: 'The design' },
+        { text: 'How you solved it: the structure, the flow, the key screens.' },
+        { images: ['assets/projects/toktracks/toktracks1.png', 'assets/projects/toktracks/toktracks2.png', 'assets/projects/toktracks/toktracks3.png','assets/projects/toktracks/toktracks4.png'] },
+        { heading: 'The prototype' },
+        { figma: 'https://www.figma.com/proto/0pyoil85HqbU71eWepQC12/vcds3111_f24_p2_g6?node-id=232-156&viewport=-177%2C532%2C0.05&t=rzQXPiWVVGPrgmJJ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=403%3A561&page-id=4%3A2', caption: 'Click through the prototype.' }
+      ]
+    },
+    {
       slug: 'spatial-editorial',
       name: 'Spatial Editorial',
       type: 'Print & Form',
@@ -130,27 +152,6 @@
         { heading: 'The design' },
         { text: 'How you solved it: the structure, the flow, the key screens.' }
         // { images: ['assets/projects/system-constraints/screen-1.jpg', 'assets/projects/system-constraints/screen-2.jpg', 'assets/projects/system-constraints/screen-3.jpg'] },
-        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
-      ]
-    },
-    {
-      slug: 'tactile-interfaces',
-      name: 'Tactile Interfaces',
-      type: 'Interaction Design',
-      cat: 'ux',
-      year: '2025',
-      role: 'Design',
-      tools: 'Add tools',
-      color: '#0055FF',
-      problem: 'One line: the problem this project set out to solve.',
-      // img: 'assets/projects/tactile-interfaces/cover.jpg',
-      content: [
-        { text: 'A longer introduction to the project: what it is and who it is for.' },
-        { heading: 'The problem' },
-        { text: 'What was not working and what you wanted to change.' },
-        { heading: 'The design' },
-        { text: 'How you solved it: the structure, the flow, the key screens.' }
-        // { images: ['assets/projects/tactile-interfaces/screen-1.jpg', 'assets/projects/tactile-interfaces/screen-2.jpg', 'assets/projects/tactile-interfaces/screen-3.jpg'] },
         // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
       ]
     },
