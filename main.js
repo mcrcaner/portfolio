@@ -107,7 +107,7 @@
         { heading: 'A hub for music and trend discovery' },
         { text: 'It allows users to save favorite trends, and view popular conctent and connect with friends, add songs to Spotify or Apple Music, and discover detailed song information such as stream counts.' },
         { heading: 'The design' },
-        { text: 'How you solved it: the structure, the flow, the key screens.' },
+        { text: 'The interface utilizes a card-based design where viral songs and trends act as digital collectibles.' },
         { images: ['assets/projects/toktracks/toktracks1.png', 'assets/projects/toktracks/toktracks2.png', 'assets/projects/toktracks/toktracks3.png','assets/projects/toktracks/toktracks4.png'] },
         { heading: 'The prototype' },
         { figma: 'https://www.figma.com/proto/0pyoil85HqbU71eWepQC12/vcds3111_f24_p2_g6?node-id=232-156&viewport=-177%2C532%2C0.05&t=rzQXPiWVVGPrgmJJ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=403%3A561&page-id=4%3A2', caption: 'Click through the prototype.' }
@@ -168,12 +168,12 @@
       // img: 'assets/projects/type-and-grid/cover.jpg',
       content: [
       //  { text: 'A longer introduction to the project: what it is and why you made it.' },
-      //  { heading: 'Print' },
-      //  { text: 'Posters, flyers.' },
-        // { images: ['assets/projects/type-and-grid/process-1.jpg', 'assets/projects/type-and-grid/process-2.jpg', 'assets/projects/type-and-grid/process-3.jpg'] },
-      //  { heading: 'Music Packaging' },
-      //  { text: 'What the finished piece looks like and what you learned.' }
-        // { image: 'assets/projects/type-and-grid/final.jpg', caption: 'The finished piece.' }
+      { heading: 'Print' },
+      { text: 'Posters, flyers.' },
+      { images: ['assets/projects/misc/ezra.jpg', 'assets/projects/type-and-grid/process-2.jpg'] },
+      { heading: 'Music Packaging' },
+      //{ text: 'What the finished piece looks like and what you learned.' },
+      { images: ['assets/projects/misc/ezra.jpg', 'assets/projects/misc/defiantjazz.png' ] },
       ]
     },
     
