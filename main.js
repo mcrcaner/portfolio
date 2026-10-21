@@ -188,7 +188,7 @@
     },
     
   ];
-  const EMAIL = 'mcrcaner@gmail.com';
+  const EMAIL = 'hello@canermutlu.com';
   const BASE_TITLE = 'Caner Mutlu';
 
   /* ================= THEME ================= */
