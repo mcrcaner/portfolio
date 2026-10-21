@@ -124,48 +124,6 @@
       ]
     },
     {
-      slug: 'spatial-editorial',
-      name: 'Spatial Editorial',
-      type: 'Print & Form',
-      cat: 'print',
-      year: '2026',
-      role: 'Design',
-      tools: 'Add tools',
-      color: '#8B0A22',
-      problem: 'One line: the problem this project set out to solve.',
-      // img: 'assets/projects/spatial-editorial/cover.jpg',
-      content: [
-        { text: 'A longer introduction to the project: what it is and why you made it.' },
-        { heading: 'The process' },
-        { text: 'How you got from the first sketches to the final layout.' },
-        // { images: ['assets/projects/spatial-editorial/process-1.jpg', 'assets/projects/spatial-editorial/process-2.jpg', 'assets/projects/spatial-editorial/process-3.jpg'] },
-        { heading: 'The result' },
-        { text: 'What the finished piece looks like and what you learned.' }
-        // { image: 'assets/projects/spatial-editorial/final.jpg', caption: 'The finished piece.' }
-      ]
-    },
-    {
-      slug: 'system-constraints',
-      name: 'System Constraints',
-      type: 'UX/UI',
-      cat: 'ux',
-      year: '2026',
-      role: 'Design',
-      tools: 'Add tools',
-      color: '#1E1C1C',
-      problem: 'One line: the problem this project set out to solve.',
-      // img: 'assets/projects/system-constraints/cover.jpg',
-      content: [
-        { text: 'A longer introduction to the project: what it is and who it is for.' },
-        { heading: 'The problem' },
-        { text: 'What was not working and what you wanted to change.' },
-        { heading: 'The design' },
-        { text: 'How you solved it: the structure, the flow, the key screens.' }
-        // { images: ['assets/projects/system-constraints/screen-1.jpg', 'assets/projects/system-constraints/screen-2.jpg', 'assets/projects/system-constraints/screen-3.jpg'] },
-        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
-      ]
-    },
-    {
       slug: 'miscellaneous',
       name: 'Miscellaneous',
       type: 'Typography Systems',
