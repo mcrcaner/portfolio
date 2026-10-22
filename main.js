@@ -50,6 +50,7 @@
         { images: ['assets/projects/fandom-house/portal1.jpg', 'assets/projects/fandom-house/portal2.jpg', 'assets/projects/fandom-house/portal3.jpg', 'assets/projects/fandom-house/portal4.jpg', 'assets/projects/fandom-house/silo1.jpg', 'assets/projects/fandom-house/silo2.jpg', 'assets/projects/fandom-house/fallout1.jpg', 'assets/projects/fandom-house/fallout2.jpg'] },
         { heading: 'The digital store' },
         { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
+         { text: 'I was aiming for a sci-fi terminal with futuristic controls. After all, we all grew up wishing JARVIS to be real.' },
         { image: 'assets/projects/fandom-house/store.png', width: '560px', caption: 'The digital store.' },
         { link: 'https://mcrcaner.github.io/fandom-house/', label: 'VISIT THE WEBSITE', caption: 'Experience the live digital store and gesture navigation.' },
         // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
@@ -60,9 +61,9 @@
       name: 'Zallak',
       type: 'Typeface',
       cat: 'type',
-      year: 'Add year',
+      year: '2024',
       role: 'Type design',
-      tools: 'Add tools',
+      tools: 'Illustrator',
       color: '#2F5D50',
       problem: 'A typeface drawn from a hand-painted apartment sign in Karşıyaka.',
       img: 'assets/projects/zallak/sign.jpg',   // used for thumbnails
