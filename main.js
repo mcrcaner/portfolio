@@ -137,11 +137,14 @@
       content: [
       //  { text: 'A longer introduction to the project: what it is and why you made it.' },
       { heading: 'Print' },
-      { text: 'Posters, flyers.' },
-      { images: ['assets/projects/misc/ezra.jpg', 'assets/projects/type-and-grid/process-2.jpg'] },
+      { text: 'Posters, book covers, etc.' },
+      { images: ['assets/projects/misc/poster1.jpg', 'assets/projects/misc/poster2.jpg'] },
       { heading: 'Music Packaging' },
       //{ text: 'What the finished piece looks like and what you learned.' },
       { images: ['assets/projects/misc/ezra.jpg', 'assets/projects/misc/defiantjazz.png' ] },
+      { heading: 'Animation' },
+      { vimeo: 'https://vimeo.com/1034292258', caption: 'Animated album cover for Büyüklere Ninniler by Paptircem.' },
+
       ]
     },
     
