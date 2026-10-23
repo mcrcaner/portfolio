@@ -52,7 +52,7 @@
         { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
          { text: 'I was aiming for a sci-fi terminal with futuristic controls. After all, we all grew up wishing JARVIS to be real.' },
         { image: 'assets/projects/fandom-house/store.png', width: '560px', caption: 'The digital store.' },
-        { link: 'https://mcrcaner.github.io/fandom-house/', label: 'VISIT THE WEBSITE', caption: 'Experience the live digital store and gesture navigation.' },
+        { link: 'https://fandomhouse.canermutlu.com/', label: 'VISIT THE WEBSITE', caption: 'Experience the live digital store and gesture navigation.' },
         // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
       ]
     },
