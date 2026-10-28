@@ -41,12 +41,12 @@
       problem: 'A specialized publishing house and its digital storefront dedicated to Sci-Fi universes, focused exclusively on crafting authentic diegetic and in-world merchandise.',
       img: 'assets/projects/fandom-house/fandomhouse-logo.jpg',
       content: [
-        { text: 'A longer introduction to the project.' },
+        // { text: 'A longer introduction to the project.' },
         { heading: 'The merchandise' },
         { text: 'As a publishing house specialized in Sci-Fi universes, Fandom House offers diegetic products ranging from books to CDs. For more detailed info on the products, you can visit the store.' },
         { images: ['assets/projects/fandom-house/thepact1.jpg', 'assets/projects/fandom-house/thepact2.jpg' , 'assets/projects/fandom-house/optics1.jpg', 'assets/projects/fandom-house/optics2.jpg', 'assets/projects/fandom-house/defiantjazz.png'] },
         { heading: 'The pop-up cards' },
-        { text: 'How the book works.' },
+        // { text: 'How the book works.' },
         { images: ['assets/projects/fandom-house/portal1.jpg', 'assets/projects/fandom-house/portal2.jpg', 'assets/projects/fandom-house/portal3.jpg', 'assets/projects/fandom-house/portal4.jpg', 'assets/projects/fandom-house/silo1.jpg', 'assets/projects/fandom-house/silo2.jpg', 'assets/projects/fandom-house/fallout1.jpg', 'assets/projects/fandom-house/fallout2.jpg'] },
         { heading: 'The digital store' },
         { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
@@ -97,7 +97,7 @@
        // { text: 'How the paper engineering works and how you tested it.' },
         { vimeo: 'https://vimeo.com/1077771469/895303fd28', caption: 'The book, opened page by page.' },
         { heading: 'Details' },
-        { text: 'How you designed the graphics for each part.' },
+        // { text: 'How you designed the graphics for each part.' },
         { images: ['assets/projects/popup-book/art-1.JPG', 'assets/projects/popup-book/art-2.JPG', 'assets/projects/popup-book/art-3.JPG', 'assets/projects/popup-book/art-4.JPG', 'assets/projects/popup-book/art-5.JPG', 'assets/projects/popup-book/art-6.JPG', 'assets/projects/popup-book/art-7.JPG'] }
       ]
     },
@@ -227,6 +227,11 @@
       r.addEventListener('mousemove', moveThumb);
       r.addEventListener('mouseleave', () => thumb.classList.remove('visible'));
     });
+  }
+  // home page cards: every project that has a cover image
+  function renderHome() {
+    $('#home-grid').innerHTML = WORK.filter(w => w.img).map((w, i) =>
+      `<a class="card" href="#work/${w.slug}" data-cursor="VIEW"><span class="card-img" style="--c:${w.color}"><img src="${w.img}" alt="${esc(w.name)}" loading="lazy"></span><span class="card-meta"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="stamps">${cats(w).map(c => `<span class="stamp">${STAMPS[c]}</span>`).join('')}</span></span><span class="name">${esc(w.name)}</span><span class="card-text">${esc(w.problem)}</span></a>`).join('');
   }
   $('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) { filter = b.dataset.f; renderWork(); } });
   $$('[data-filter]').forEach(a => a.addEventListener('click', () => { filter = a.dataset.filter; renderWork(); }));
@@ -605,17 +610,28 @@
     requestAnimationFrame(frame);
   }
 
+  /* hero captions: slide a caption left if it would run past the page edge */
+  function fitCap(v) {
+    const cap = v.querySelector('.cap'); if (!cap) return;
+    v.style.setProperty('--shift', '0px');
+    const hero = $('#home');
+    const limit = hero.getBoundingClientRect().right - parseFloat(getComputedStyle(hero).paddingRight);
+    const over = cap.getBoundingClientRect().right - limit;
+    if (over > 0) v.style.setProperty('--shift', -over + 'px');
+  }
+  $$('.verb').forEach(v => ['mouseenter', 'focus'].forEach(ev => v.addEventListener(ev, () => fitCap(v))));
+
   /* ================= INIT ================= */
   $('#year').textContent = new Date().getFullYear();
   const saved = store.get('theme');
   setTheme(THEMES.includes(saved) ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  renderWork(); updateStats(); nextIdx = takeBag(); drawPreviews(); draw();
+  renderWork(); renderHome(); updateStats(); nextIdx = takeBag(); drawPreviews(); draw();
   $$('.panel .reveal').forEach(el => { if (!el.closest('#case-body')) el.style.setProperty('--i', [...el.parentNode.children].indexOf(el)); });
   route();
   // touch screens have no hover, so play the three hero effects once, one after another
   if (matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     ['hold', 'fold', 'click'].forEach((v, i) => setTimeout(() => {
-      const el = $('.verb.' + v); el.classList.add('demo'); setTimeout(() => el.classList.remove('demo'), 1100);
+      const el = $('.verb.' + v); fitCap(el); el.classList.add('demo'); setTimeout(() => el.classList.remove('demo'), 1100);
     }, 2300 + i * 1000));
   }
   requestAnimationFrame(frame);
