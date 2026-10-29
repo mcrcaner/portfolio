@@ -453,10 +453,22 @@
   /* ================= TETRIS ================= */
   const BS = 30, COLS = 10, ROWS = 20, POINTS = [0, 100, 300, 500, 800];
   const SHAPES = [[], [[1,1,1,1]], [[2,0,0],[2,2,2]], [[0,0,3],[3,3,3]], [[4,4],[4,4]], [[0,5,5],[5,5,0]], [[0,6,0],[6,6,6]], [[7,7,0],[0,7,7]]];
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  const fit = (c, w, h) => { c.width = w * dpr; c.height = h * dpr; const x = c.getContext('2d'); x.setTransform(dpr, 0, 0, dpr, 0, 0); return x; };
   const boardCv = $('#tetris-canvas'), nextCv = $('#next-canvas'), holdCv = $('#hold-canvas');
-  const tCtx = fit(boardCv, COLS * BS, ROWS * BS), nCtx = fit(nextCv, 100, 100), hCtx = fit(holdCv, 100, 100);
+  const tCtx = boardCv.getContext('2d'), nCtx = nextCv.getContext('2d'), hCtx = holdCv.getContext('2d');
+  let cell = BS, lw = 2; // board cell size and block line width, in canvas pixels
+
+  /* Canvases are drawn at the size they are shown on screen (in device pixels), so every line
+     lands on whole pixels and nothing gets rescaled by the browser. */
+  function sizeCanvases() {
+    const d = Math.min(devicePixelRatio || 1, 3);
+    const bw = boardCv.clientWidth * d || BS * COLS * Math.min(d, 2);
+    cell = Math.max(10, Math.round(bw / COLS)); lw = Math.max(1, Math.round(cell * 2 / BS));
+    if (boardCv.width !== cell * COLS || boardCv.height !== cell * ROWS) { boardCv.width = cell * COLS; boardCv.height = cell * ROWS; }
+    [nextCv, holdCv].forEach(cv => {
+      const p = Math.round(cv.clientWidth * d) || Math.round(100 * Math.min(d, 2));
+      if (cv.width !== p || cv.height !== p) { cv.width = p; cv.height = p; }
+    });
+  }
   const startBtn = $('#tetris-start-btn');
 
   let board, score = 0, lines = 0, level = 1, best = Number(store.get('tetris-best')) || 0;
@@ -529,35 +541,72 @@
   }
   function ghostY() { let y = player.y; while (!collide(player.m, player.x, y + 1)) y++; return y; }
 
-  function block(ctx, x, y, s, idx, alpha = 1) {
-    ctx.globalAlpha = alpha; ctx.fillStyle = theme.pieces[idx]; ctx.fillRect(x, y, s, s);
-    ctx.strokeStyle = theme.ink; ctx.lineWidth = 2; ctx.strokeRect(x + 1, y + 1, s - 2, s - 2); ctx.globalAlpha = 1;
+  /* Block outlines sit on one shared lattice: every line is centred on a cell boundary, so a line
+     between two blocks and a line along the outside of a piece have the same thickness and meet
+     without a step, even at inner corners. Against the board walls the line stays inside the canvas. */
+  function span(b, max, t) {
+    if (max != null) { if (b <= 0) return [0, t]; if (b >= max) return [max - t, max]; }
+    return [b - Math.ceil(t / 2), b + Math.floor(t / 2)];
   }
+  function lineRects(R, c, s, t, W, H) {
+    const x0 = span(c.x, W, t), x1 = span(c.x + s, W, t), y0 = span(c.y, H, t), y1 = span(c.y + s, H, t), nb = c.nb;
+    [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].forEach(([xs, ys]) => R.push([xs[0], ys[0], xs[1] - xs[0], ys[1] - ys[0]])); // corner points
+    const midW = x1[0] - x0[1], midH = y1[0] - y0[1];
+    if (midW > 0) { R.push([x0[1], y0[0], midW, y0[1] - y0[0]]); if (!nb.b) R.push([x0[1], y1[0], midW, y1[1] - y1[0]]); } // top, bottom
+    if (midH > 0) { R.push([x0[0], y0[1], x0[1] - x0[0], midH]); if (!nb.r) R.push([x1[0], y0[1], x1[1] - x1[0], midH]); } // left, right
+  }
+  // cells: [{x, y, idx, nb}]; all fills first, then all outlines as one path (so overlaps never double up)
+  function paint(ctx, cells, s, t, alpha, W, H) {
+    ctx.globalAlpha = alpha;
+    cells.forEach(c => { ctx.fillStyle = theme.pieces[c.idx]; ctx.fillRect(c.x, c.y, s, s); });
+    const R = []; cells.forEach(c => lineRects(R, c, s, t, W, H));
+    ctx.fillStyle = theme.ink; ctx.beginPath(); R.forEach(r => ctx.rect(r[0], r[1], r[2], r[3])); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  const sides = (solid, r, c) => ({ t: solid(r - 1, c), b: solid(r + 1, c), l: solid(r, c - 1), r: solid(r, c + 1) });
   function overlay(t, sub) {
-    tCtx.fillStyle = 'rgba(0,0,0,.65)'; tCtx.fillRect(0, 0, COLS * BS, ROWS * BS);
+    const W = COLS * cell, H = ROWS * cell, k = cell / BS;
+    tCtx.fillStyle = 'rgba(0,0,0,.65)'; tCtx.fillRect(0, 0, W, H);
     tCtx.fillStyle = '#fff'; tCtx.textAlign = 'center';
-    tCtx.font = "600 26px 'IBM Plex Mono', monospace"; tCtx.fillText(t, COLS * BS / 2, ROWS * BS / 2 - 6);
-    tCtx.font = "400 16px 'IBM Plex Mono', monospace"; tCtx.fillText(sub, COLS * BS / 2, ROWS * BS / 2 + 24); tCtx.textAlign = 'start';
+    tCtx.font = `600 ${Math.round(26 * k)}px 'IBM Plex Mono', monospace`; tCtx.fillText(t, W / 2, H / 2 - 6 * k);
+    tCtx.font = `400 ${Math.round(16 * k)}px 'IBM Plex Mono', monospace`; tCtx.fillText(sub, W / 2, H / 2 + 24 * k); tCtx.textAlign = 'start';
   }
   function draw() {
-    tCtx.fillStyle = theme.bg; tCtx.fillRect(0, 0, COLS * BS, ROWS * BS);
-    tCtx.strokeStyle = theme.grid; tCtx.lineWidth = 1;
-    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) tCtx.strokeRect(c * BS, r * BS, BS, BS);
-    board.forEach((row, r) => row.forEach((v, c) => v && block(tCtx, c * BS, r * BS, BS, v)));
-    if (player.m && state !== 'over') {
-      const gy = ghostY();
-      player.m.forEach((row, r) => row.forEach((v, c) => { if (v) { block(tCtx, (player.x + c) * BS, (gy + r) * BS, BS, player.shape, .25); } }));
-      player.m.forEach((row, r) => row.forEach((v, c) => { if (v) block(tCtx, (player.x + c) * BS, (player.y + r) * BS, BS, player.shape); }));
+    const W = COLS * cell, H = ROWS * cell;
+    tCtx.fillStyle = theme.bg; tCtx.fillRect(0, 0, W, H);
+    // background grid: one line per boundary, drawn as a single path so crossings don't double up
+    const g = Math.max(1, Math.round(cell / BS));
+    tCtx.strokeStyle = theme.grid; tCtx.lineWidth = g; tCtx.beginPath();
+    for (let i = 1; i < COLS; i++) { const x = i * cell - Math.floor(g / 2) + g / 2; tCtx.moveTo(x, 0); tCtx.lineTo(x, H); }
+    for (let i = 1; i < ROWS; i++) { const y = i * cell - Math.floor(g / 2) + g / 2; tCtx.moveTo(0, y); tCtx.lineTo(W, y); }
+    tCtx.stroke();
+    const live = player.m && state !== 'over';
+    const cells = py => { const s = new Set(); player.m.forEach((row, r) => row.forEach((v, c) => { if (v) s.add((py + r) * 64 + player.x + c); })); return s; };
+    const onBoard = (r, c) => !!(board[r] && board[r][c]);
+    const active = live ? cells(player.y) : new Set();
+    const solid = (r, c) => onBoard(r, c) || active.has(r * 64 + c);
+    if (live) {
+      const gy = ghostY(), ghost = cells(gy), gSolid = (r, c) => solid(r, c) || ghost.has(r * 64 + c), gc = [];
+      player.m.forEach((row, r) => row.forEach((v, c) => { if (v) gc.push({ x: (player.x + c) * cell, y: (gy + r) * cell, idx: player.shape, nb: sides(gSolid, gy + r, player.x + c) }); }));
+      paint(tCtx, gc, cell, lw, .25, W, H);
     }
+    const main = [];
+    board.forEach((row, r) => row.forEach((v, c) => { if (v) main.push({ x: c * cell, y: r * cell, idx: v, nb: sides(solid, r, c) }); }));
+    if (live) player.m.forEach((row, r) => row.forEach((v, c) => { if (v) main.push({ x: (player.x + c) * cell, y: (player.y + r) * cell, idx: player.shape, nb: sides(solid, player.y + r, player.x + c) }); }));
+    paint(tCtx, main, cell, lw, 1, W, H);
     if (state === 'idle') overlay('READY', 'PRESS START');
     else if (state === 'pause') overlay('PAUSED', 'PRESS P');
     else if (state === 'over') overlay('GAME OVER', 'SCORE ' + score);
   }
   function preview(ctx, idx) {
-    ctx.fillStyle = theme.bg; ctx.fillRect(0, 0, 100, 100);
+    const P = ctx.canvas.width;
+    ctx.fillStyle = theme.bg; ctx.fillRect(0, 0, P, P);
     if (!idx) return;
-    const m = SHAPES[idx], s = 22, ox = (100 - m[0].length * s) / 2, oy = (100 - m.length * s) / 2;
-    m.forEach((row, r) => row.forEach((v, c) => v && block(ctx, ox + c * s, oy + r * s, s, idx)));
+    const m = SHAPES[idx], s = Math.max(6, Math.round(P * .22)), t = Math.max(1, Math.round(s * 2 / 22));
+    const ox = Math.round((P - m[0].length * s) / 2), oy = Math.round((P - m.length * s) / 2);
+    const solid = (r, c) => !!(m[r] && m[r][c]);
+    const pc = []; m.forEach((row, r) => row.forEach((v, c) => { if (v) pc.push({ x: ox + c * s, y: oy + r * s, idx, nb: sides(solid, r, c) }); }));
+    paint(ctx, pc, s, t, 1, null, null);
   }
   function drawPreviews() { preview(nCtx, nextIdx || 0); preview(hCtx, holdIdx); }
 
@@ -625,7 +674,8 @@
   $('#year').textContent = new Date().getFullYear();
   const saved = store.get('theme');
   setTheme(THEMES.includes(saved) ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  renderWork(); renderHome(); updateStats(); nextIdx = takeBag(); drawPreviews(); draw();
+  renderWork(); renderHome(); updateStats(); nextIdx = takeBag(); sizeCanvases(); drawPreviews(); draw();
+  if (window.ResizeObserver) { const ro = new ResizeObserver(() => { sizeCanvases(); drawPreviews(); draw(); }); [boardCv, nextCv, holdCv].forEach(c => ro.observe(c)); }
   $$('.panel .reveal').forEach(el => { if (!el.closest('#case-body')) el.style.setProperty('--i', [...el.parentNode.children].indexOf(el)); });
   route();
   // touch screens have no hover, so play the three hero effects once, one after another

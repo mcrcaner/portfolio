@@ -1,8 +1,8 @@
-:root[data-theme="light"]{--bg-color:#F3F0E9;--text-color:#1E1C1C;--accent-color:#8B0A22;--panel-bg:#EAE6DD;--card-border:rgba(30,28,28,.3);--tetris-bg:#E5E1D8;--grid-line:rgba(30,28,28,.1);
---p1:#8B0A22;--p2:#C9A227;--p3:#2F5D50;--p4:#D9825B;--p5:#5B7DB1;--p6:#7A4E8C;--p7:#1E1C1C}
-:root[data-theme="dark"]{--bg-color:#14110F;--text-color:#EDE7DC;--accent-color:#7FE0B0;--panel-bg:#1D1916;--card-border:rgba(237,231,220,.3);--tetris-bg:#1A1613;--grid-line:rgba(237,231,220,.09);
---p1:#FF6B35;--p2:#F5D547;--p3:#F09BA8;--p4:#5CC8E8;--p5:#8FA2FF;--p6:#C79BFF;--p7:#EDE7DC}
-:root[data-theme="pop"]{--bg-color:#2F4BFF;--text-color:#F6F0E4;--accent-color:#FFD60A;--panel-bg:#2740E6;--card-border:rgba(246,240,228,.4);--tetris-bg:#2438D4;--grid-line:rgba(246,240,228,.14);
+:root[data-theme="light"]{--bg-color:#F8F4EC;--text-color:#1A1717;--accent-color:#D10F2F;--panel-bg:#EFE9DD;--card-border:rgba(26,23,23,.3);--tetris-bg:#EAE3D6;--grid-line:rgba(26,23,23,.1);
+--p1:#D10F2F;--p2:#C9A227;--p3:#2F5D50;--p4:#D9825B;--p5:#5B7DB1;--p6:#7A4E8C;--p7:#E27D9B}
+:root[data-theme="dark"]{--bg-color:#0C1210;--text-color:#E9F0EA;--accent-color:#2EE59D;--panel-bg:#141C18;--card-border:rgba(233,240,234,.3);--tetris-bg:#111915;--grid-line:rgba(233,240,234,.09);
+--p1:#FF6B35;--p2:#F5D547;--p3:#F09BA8;--p4:#5CC8E8;--p5:#8FA2FF;--p6:#C79BFF;--p7:#2EE59D}
+:root[data-theme="pop"]{--bg-color:#2438E0;--text-color:#F6F0E4;--accent-color:#FFD60A;--panel-bg:#1D2FC4;--card-border:rgba(246,240,228,.4);--tetris-bg:#1A2AB4;--grid-line:rgba(246,240,228,.14);
 --p1:#FFD60A;--p2:#F6F0E4;--p3:#FF7A59;--p4:#7CF5C0;--p5:#FF9EC4;--p6:#C3B1FF;--p7:#0B1450}
 
 :root{--pad:clamp(1.25rem,5vw,5rem)}
@@ -67,7 +67,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 /* fold: the word is split along a crease through the letters; the top half tilts back */
 .verb.fold{color:transparent}
 .verb.fold::before,.verb.fold::after{content:attr(data-text);position:absolute;left:0;top:0;white-space:nowrap;color:var(--accent-color)}
-.verb.fold::before{clip-path:inset(0 0 48% 0);transform-origin:50% 52%;transform:perspective(500px) rotateX(0deg);transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
+.verb.fold::before{clip-path:inset(0 0 calc(48% - 1px) 0);transform-origin:50% 52%;transform:none;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
 .verb.fold::after{clip-path:inset(52% 0 0 0)}
 .verb.fold:hover::before,.verb.fold.demo::before{transform:perspective(500px) rotateX(58deg);opacity:.8}
 .verb.click::before{content:'';position:absolute;inset:-.05em -.12em;border:2px solid var(--accent-color);border-radius:50%;opacity:0;pointer-events:none}
