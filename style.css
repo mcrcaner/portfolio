@@ -13,14 +13,13 @@ a,button{color:inherit;text-decoration:none;background:none;border:none;font:inh
 :focus-visible{outline:2px solid var(--accent-color);outline-offset:3px}
 h2:focus{outline:none}
 ::selection{background:var(--accent-color);color:var(--bg-color)}
-b{font-weight:600}
 
 #custom-cursor{display:none}
 @media (hover:hover) and (pointer:fine){
   body.has-cursor,body.has-cursor a,body.has-cursor button{cursor:none}
   #custom-cursor{display:grid;place-items:center;font-size:.65rem;font-weight:600;letter-spacing:.05em;color:var(--bg-color);overflow:hidden;position:fixed;top:0;left:0;width:18px;height:18px;border-radius:50%;background:var(--accent-color);box-shadow:0 0 0 2px var(--bg-color);pointer-events:none;opacity:0;transition:width .2s,height .2s,background-color .2s,box-shadow .2s,opacity .3s;z-index:99999}
   body.cursor-ready #custom-cursor{opacity:1}
-  /* the cursor is always the theme accent; a thin ring in the page color keeps it visible over accent-colored things */
+
   body.hovering #custom-cursor{width:48px;height:48px;background:transparent;box-shadow:inset 0 0 0 2px var(--accent-color),0 0 0 2px var(--bg-color)}
   body.cursor-label #custom-cursor{width:76px;height:76px;background:var(--accent-color);box-shadow:0 0 0 2px var(--bg-color)}
 }
@@ -31,7 +30,6 @@ b{font-weight:600}
 .loader-bar-container{width:200px;height:2px;background:var(--card-border);position:relative;overflow:hidden}
 .loader-bar{position:absolute;inset:0 auto 0 0;width:0;background:var(--accent-color);transition:width .4s ease-out}
 
-/* Persistent nav + footer; panels live in the stage between them */
 nav,footer{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:500;letter-spacing:.05em;padding:1.1rem var(--pad);position:relative;z-index:600;background:var(--bg-color);transition:background-color .4s}
 nav{border-bottom:2px solid var(--text-color)}
 footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wrap:wrap}
@@ -49,22 +47,21 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 
 .stage{flex:1;min-height:0;position:relative;overflow:hidden}
 .hero,.panel{position:absolute;inset:0;overflow-y:auto}
-.hero{overflow-x:hidden} /* the hidden hover captions must never create sideways scroll */
-.hero{padding:clamp(2.5rem,7vh,5rem) var(--pad) clamp(2.5rem,7vh,4.5rem);display:flex;flex-direction:column;justify-content:flex-start;gap:3.5rem}
-.hero-screen{flex-shrink:0;display:flex;flex-direction:column;gap:3.5rem;min-height:calc(100% - 3rem)} /* a little shorter than the screen, so the work section peeks in */
+.hero{overflow-x:hidden;padding:clamp(2.5rem,7vh,5rem) var(--pad) clamp(2.5rem,7vh,4.5rem);display:flex;flex-direction:column;justify-content:flex-start;gap:3.5rem}
+.hero-screen{flex-shrink:0;display:flex;flex-direction:column;gap:3.5rem;min-height:calc(100% - 3rem)}
 .hero-main{margin:auto 0}
 .hero-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.8rem;font-weight:500;letter-spacing:.05em}
 .hero-title{font-family:'Caprasimo',serif;font-weight:400;font-size:clamp(2rem,4.6vw,4.75rem);line-height:1.25;letter-spacing:-.02em;max-width:980px;margin-bottom:2rem}
-.hero-title .verb{font-style:normal;color:var(--accent-color)}
+.hero-title .verb{color:var(--accent-color)}
 .hero-title>span{color:var(--accent-color)}
 .hero-sub{max-width:620px;font-size:1.05rem;line-height:1.65;margin-bottom:2.5rem}
-/* hero verbs: each word acts out its meaning on hover */
+
 .verb{position:relative;display:inline-block}
-.nw{white-space:nowrap} /* keeps a keyword and its comma/period on the same line */
-/* the word moves, the caption underneath stays put, so all three captions line up */
+.nw{white-space:nowrap}
+
 .verb .w{display:inline-block;text-decoration:underline;text-decoration-color:var(--accent-color);text-decoration-thickness:.05em;text-underline-offset:.14em;transition:transform .25s cubic-bezier(.16,1,.3,1)}
 .verb.hold:hover .w,.verb.hold.demo .w{transform:translateY(-.1em) rotate(-2deg)}
-/* fold: the word is split along a crease through the letters; the top half tilts back */
+
 .verb.fold{color:transparent}
 .verb.fold::before,.verb.fold::after{content:attr(data-text);position:absolute;left:0;top:0;white-space:nowrap;color:var(--accent-color)}
 .verb.fold::before{clip-path:inset(0 0 calc(48% - 1px) 0);transform-origin:50% 52%;transform:none;transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .35s}
@@ -75,7 +72,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .verb.click:hover::before,.verb.click.demo::before{animation:ring .55s ease-out}
 @keyframes press{40%{transform:scale(.93)}}
 @keyframes ring{from{opacity:.9;transform:scale(.7)}to{opacity:0;transform:scale(1.3)}}
-/* caption that appears under each headline word on hover, in the gap between lines */
+
 .verb .cap{position:absolute;left:var(--shift,0px);top:calc(100% - .14em);font-family:'IBM Plex Mono',monospace;font-size:max(.75rem,.19em);font-weight:600;letter-spacing:.06em;line-height:1;white-space:nowrap;color:var(--text-color);text-shadow:none;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .25s;pointer-events:none}
 .verb:hover .cap,.verb:focus-visible .cap,.verb.demo .cap{opacity:1;transform:none}
 .hero-cta,.contact-actions{display:flex;gap:1rem;flex-wrap:wrap}
@@ -83,7 +80,6 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--text-color)}
 .btn.ghost{background:transparent;color:var(--text-color)}
 
-/* home: selected work */
 .home-work{flex-shrink:0;border-top:2px solid var(--text-color);padding-top:1.5rem;margin-top:1rem}
 .home-work-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:.8rem;font-weight:500;letter-spacing:.05em;margin-bottom:2.5rem;max-width:1100px}
 .home-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem 1.5rem;max-width:1100px;padding-bottom:1rem}
@@ -98,11 +94,11 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .card:hover .stamp{background:var(--accent-color);color:var(--bg-color);transform:rotate(0deg) scale(1.06)}
 .card .name{font-family:'Caprasimo',serif;font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.2;transition:color .2s}
 .card:hover .name{color:var(--accent-color)}
-.card-text{font-size:.75rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-text{font-size:.75rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 .panel{background:var(--bg-color);padding:2rem var(--pad);opacity:0;pointer-events:none;visibility:hidden;clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%);transition:clip-path .7s cubic-bezier(.85,0,.15,1),opacity .7s,visibility 0s .7s}
 .panel.active{opacity:1;pointer-events:auto;visibility:visible;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transition-delay:0s;z-index:2}
-/* outgoing panel stays put under the incoming wipe, so Home never shows through */
+
 .panel.leaving{z-index:1;opacity:1;visibility:visible;pointer-events:none;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);transition:none}
 .panel-header{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:500;padding-bottom:1.5rem;border-bottom:2px solid var(--text-color);margin-bottom:2.5rem}
 .close-btn:hover{color:var(--accent-color)}
@@ -112,7 +108,6 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .lede{max-width:640px;font-size:1.05rem;line-height:1.65;margin-bottom:2.5rem}
 .small{font-size:.85rem;line-height:1.7}
 
-/* staggered reveal after the clip-path wipe */
 .panel.active .reveal,.panel.active .row{animation:rise .6s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.4s + var(--i,0) * 60ms)}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}}
 
@@ -124,7 +119,6 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .row:hover{padding-left:10px;border-bottom-color:var(--accent-color)}
 .row .num{color:var(--accent-color);font-size:.85rem}
 .row .name{font-family:'Caprasimo',serif;font-size:1.8rem}
-.row .type{font-size:.85rem}
 .stamps{display:flex;gap:.5rem;justify-content:flex-end;flex-wrap:wrap}
 .stamp{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.08em;padding:.3rem .6rem;border:2px solid var(--accent-color);color:var(--accent-color);transform:rotate(-3deg);transition:background-color .2s,color .2s,transform .2s}
 .stamp:nth-child(even){transform:rotate(2deg)}
@@ -148,7 +142,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .embed{position:relative;width:100%;border:2px solid var(--text-color);background:var(--panel-bg)}
 .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .download{display:flex;flex-direction:column;align-items:flex-start;gap:.75rem}
-/* typeface specimen */
+
 @font-face{font-family:'Zallak';src:url('assets/fonts/Zallak-Regular.ttf') format('truetype');font-display:swap}
 .spec-big{font-family:var(--spec-font),monospace;font-size:clamp(2.5rem,10vw,8rem);line-height:1.05;margin-bottom:2rem;white-space:nowrap;overflow:hidden}
 .spec-big span{display:inline-block}
@@ -166,13 +160,13 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
 .spec-glyphs span:hover{background:var(--accent-color);color:var(--bg-color)}
 .ph-grid .ph{aspect-ratio:4/3;min-height:0}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
-/* fixed-ratio frames: the image fills the frame and is cropped inside it, so it can never spill over the text below */
+
 .ph.hero-img img,.ph-grid .ph img{position:absolute;inset:0}
 .ph-grid .ph{overflow:hidden}
 .gal-btn{position:absolute;inset:0;display:block;width:100%;height:100%;padding:0;background:none}
 .gal-btn img{transition:transform .4s cubic-bezier(.16,1,.3,1)}
 .gal-btn:hover img{transform:scale(1.05)}
-/* image gallery overlay */
+
 #lightbox{position:fixed;inset:0;z-index:800;display:flex;align-items:center;justify-content:center;padding:4.5rem 5.5rem 3rem;background:rgba(10,10,10,.93);color:#fff;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
 #lightbox.open{opacity:1;visibility:visible;transition-delay:0s}
 .lb-scrim{position:absolute;inset:0}
@@ -255,11 +249,11 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
   .meta{grid-template-columns:1fr 1fr}
   .row{grid-template-columns:72px 1fr;gap:.15rem 1rem;align-items:center}
   .row-thumb{display:block;grid-row:1/4;grid-column:1;width:72px;height:56px;border:2px solid var(--text-color)}
-  .row .num,.row .name,.row .type,.row .stamps{grid-column:2}
+  .row .num,.row .name,.row .stamps{grid-column:2}
   .row .stamps{justify-content:flex-start}
   .row .name{font-size:1.4rem}
   #thumbnail-preview{display:none}
-  /* compact Tetris: board and controls fit on one screen */
+
   #panel-play .panel-content{display:flex;flex-direction:column}
   #panel-play .panel-title{font-size:1.7rem;margin-bottom:.75rem}
   #panel-play .lede{order:3;margin:1.25rem 0 0;font-size:.9rem}
@@ -278,7 +272,7 @@ footer{border-top:2px solid var(--text-color);font-size:.75rem;gap:1rem;flex-wra
   .previews .tetris-panel{padding:.5rem}
   .previews canvas{width:100%;height:auto;aspect-ratio:1}
 }
-/* theme change: new colors spread outward from the clicked button (View Transitions) */
+
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-old(root){z-index:1}
 ::view-transition-new(root){z-index:2}

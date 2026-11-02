@@ -7,25 +7,6 @@
     set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
 
-  /* ================= CONTENT (edit here) ================= */
-  // Each project: slug, name, cat, year, role, tools, color, problem (one line), img (cover image).
-  // `cat` can be one category ('print') or several (['print', 'popup', 'ux']).
-  // `content` is the project page below the cover, shown in order. Each item is ONE of:
-  //   { heading: 'Title' }   { text: 'A paragraph.' }   { image: 'assets/x.jpg', caption: '...' }
-  //   { download: 'assets/fonts/x.ttf', label: 'DOWNLOAD', note: 'optional' }   { specimen: { font: 'FontName' } }
-  //   (an image item can also have width: '560px' to make it smaller)
-  //   Add hero: false to a project to hide its big cover image at the top of the page.
-  //   { images: ['a.jpg', 'b.jpg', 'c.jpg'] }   { vimeo: 'https://vimeo.com/123456789' }
-  //   { figma: 'https://www.figma.com/proto/...', ratio: '9/16', width: '420px' }  (ratio and width are optional)
-  
-  //    { links: [
-    //{ url: 'https://your-fandom-house-site.com', label: 'VISIT THE WEBSITE' },
-    //{ url: 'https://another-link.com', label: 'SEE THE PROTOTYPE' }
-    //] }, 
-  // or 
-  // { link: 'https://your-fandom-house-site.com', label: 'VISIT THE WEBSITE', caption: 'optional caption' },
- 
-  // Any item can also have a `caption`. Use quotes carefully: write "Caner's" with double quotes.
   const CATS = { popup: 'Pop-up & Paper', print: 'Print & Editorial', ux: 'UX/UI', type: 'Type & Lettering' };
   const STAMPS = { popup: 'POP-UP', print: 'PRINT', ux: 'UX/UI', type: 'TYPE' };
   const cats = w => [].concat(w.cat);
@@ -33,7 +14,7 @@
     {
       slug: 'fandom-house',
       name: 'Fandom House',
-      cat: ['print', 'popup', 'ux'],   // several categories: use a list
+      cat: ['print', 'popup', 'ux'],
       year: '2026',
       role: 'Design, paper engineering',
       tools: 'Illustrator, Photoshop, HTML, CSS, JS',
@@ -41,33 +22,29 @@
       problem: 'A specialized publishing house and its digital storefront dedicated to Sci-Fi universes, focused exclusively on crafting authentic diegetic and in-world merchandise.',
       img: 'assets/projects/fandom-house/fandomhouse-logo.jpg',
       content: [
-        // { text: 'A longer introduction to the project.' },
         { heading: 'The merchandise' },
         { text: 'As a publishing house specialized in Sci-Fi universes, Fandom House offers diegetic products ranging from books to CDs. For more detailed info on the products, you can visit the store.' },
         { images: ['assets/projects/fandom-house/thepact1.jpg', 'assets/projects/fandom-house/thepact2.jpg' , 'assets/projects/fandom-house/optics1.jpg', 'assets/projects/fandom-house/optics2.jpg', 'assets/projects/fandom-house/defiantjazz.png'] },
         { heading: 'The pop-up cards' },
-        // { text: 'How the book works.' },
         { images: ['assets/projects/fandom-house/portal1.jpg', 'assets/projects/fandom-house/portal2.jpg', 'assets/projects/fandom-house/portal3.jpg', 'assets/projects/fandom-house/portal4.jpg', 'assets/projects/fandom-house/silo1.jpg', 'assets/projects/fandom-house/silo2.jpg', 'assets/projects/fandom-house/fallout1.jpg', 'assets/projects/fandom-house/fallout2.jpg'] },
         { heading: 'The digital store' },
         { text: 'An immersive sci-fi terminal for "artifacts across realities" with touch-free navigation. Designed as a multiverse archive of artifacts, the store utilizes Mediapipe and offers a shopping experience with gesture controls. Do not hesitate to visit the store and try it yourself.' },
          { text: 'I was aiming for a sci-fi terminal with futuristic controls. After all, we all grew up wishing JARVIS to be real.' },
         { image: 'assets/projects/fandom-house/store.png', width: '560px', caption: 'The digital store.' },
         { link: 'https://fandomhouse.canermutlu.com/', label: 'VISIT THE WEBSITE', caption: 'Experience the live digital store and gesture navigation.' },
-        // { figma: 'https://www.figma.com/proto/your-link', caption: 'Click through the prototype.' }
       ]
     },
     {
       slug: 'zallak',
       name: 'Zallak',
-      type: 'Typeface',
       cat: 'type',
       year: '2024',
       role: 'Type design',
       tools: 'Illustrator',
       color: '#2F5D50',
       problem: 'A typeface drawn from a hand-painted apartment sign in Karşıyaka.',
-      img: 'assets/projects/zallak/sign.jpg',   // used for thumbnails
-      hero: false,                               // false = don't show it big at the top of the page
+      img: 'assets/projects/zallak/sign.jpg',
+      hero: false,
       content: [
         { text: 'Zallak began with the hand-painted name signs above the doors of old apartment buildings in Karşıyaka.' },
         { text: 'One of them, Zallak Ap., had only a few letters to work from. I used those as a starting point and drew the rest of the alphabet in the same style, keeping the spirit of the original lettering and giving it a new digital form.' },
@@ -76,14 +53,11 @@
         { text: 'Zallak has uppercase letters only, so whatever you type is set in capitals.' },
         { specimen: { font: 'Zallak' } },
         { download: 'assets/fonts/Zallak-Regular.ttf', label: 'DOWNLOAD ZALLAK', note: 'Free for personal use.' },
-        
-
       ]
     },
     {
       slug: 'popup-book',
       name: 'Macrodata Refiner’s Orientation Pop-Up Booklet',
-      type: 'Paper Engineering',
       cat: ['print', 'popup'],
       year: '2025',
       role: 'Design, paper engineering',
@@ -94,17 +68,14 @@
       content: [
         { text: 'It is designed carefully so that every piece of information fits what an innie would know: nothing is revealed that they shouldn’t. The text uses Lumon’s company voice, and the pop-up pages bring key experiences to life, like the Music Dance Experience, the ORTBO, and the Melon Bar. The goal was to design a piece that could feel like a real prop from the show.' },
         { heading: 'Spreads' },
-       // { text: 'How the paper engineering works and how you tested it.' },
         { vimeo: 'https://vimeo.com/1077771469/895303fd28', caption: 'The book, opened page by page.' },
         { heading: 'Details' },
-        // { text: 'How you designed the graphics for each part.' },
         { images: ['assets/projects/popup-book/art-1.JPG', 'assets/projects/popup-book/art-2.JPG', 'assets/projects/popup-book/art-3.JPG', 'assets/projects/popup-book/art-4.JPG', 'assets/projects/popup-book/art-5.JPG', 'assets/projects/popup-book/art-6.JPG', 'assets/projects/popup-book/art-7.JPG'] }
       ]
     },
     {
       slug: 'toktracks',
       name: 'TokTracks',
-      type: 'Interaction Design',
       cat: 'ux',
       year: '2024',
       role: 'Design',
@@ -127,33 +98,26 @@
     {
       slug: 'miscellaneous',
       name: 'Miscellaneous',
-      type: 'Typography Systems',
       cat: ['print', 'popup'],
       year: '2022-',
       role: 'Design',
       tools: 'Illustrator, Photoshop, After Effects',
       color: '#333333',
       problem: 'These are some designs that are not part of a bigger project, but I still want to showcase them.',
-      // img: 'assets/projects/type-and-grid/cover.jpg',
       content: [
-      //  { text: 'A longer introduction to the project: what it is and why you made it.' },
       { heading: 'Print' },
       { text: 'Posters, book covers, etc.' },
       { images: ['assets/projects/misc/poster1.jpg', 'assets/projects/misc/poster2.jpg'] },
       { heading: 'Music Packaging' },
-      //{ text: 'What the finished piece looks like and what you learned.' },
       { images: ['assets/projects/misc/ezra.jpg', 'assets/projects/misc/defiantjazz.png' ] },
       { heading: 'Animation' },
       { vimeo: 'https://vimeo.com/1034292258', caption: 'Animated album cover for Büyüklere Ninniler by Paptircem.' },
-
       ]
     },
-    
   ];
   const EMAIL = 'hello@canermutlu.com';
   const BASE_TITLE = 'Caner Mutlu';
 
-  /* ================= THEME ================= */
   const THEMES = ['light', 'dark', 'pop'];
   let theme = {};
   const cssVar = n => getComputedStyle(root).getPropertyValue(n).trim();
@@ -167,7 +131,7 @@
     $$('.theme-btn').forEach(b => { const on = b.dataset.themeBtn === name; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on); });
     store.set('theme', name);
     readTheme();
-    if (typeof draw === 'function') { draw(); drawPreviews(); }
+    draw(); drawPreviews();
   }
   function changeTheme(name, btn) {
     if (name === root.getAttribute('data-theme')) return;
@@ -184,7 +148,6 @@
   }
   $$('.theme-btn').forEach(b => b.addEventListener('click', () => changeTheme(b.dataset.themeBtn, b)));
 
-  /* ================= CURSOR ================= */
   const cursor = $('#custom-cursor');
   let mx = -100, my = -100, cx = -100, cy = -100, cursorOn = false;
   addEventListener('mousemove', e => {
@@ -198,7 +161,6 @@
     document.body.classList.toggle('cursor-label', !!t);
   });
 
-  /* ================= LOADER ================= */
   (() => {
     const bar = $('#loader-bar'), el = $('#loader'); let done = false;
     const finish = () => { if (done) return; done = true; bar.style.width = '100%'; setTimeout(() => el.classList.add('loader-hidden'), 400); };
@@ -208,7 +170,6 @@
     setTimeout(finish, 1800);
   })();
 
-  /* ================= WORK LIST + CASE STUDY ================= */
   let filter = 'all';
   const stagger = (els) => els.forEach((el, i) => el.style.setProperty('--i', i));
 
@@ -228,7 +189,6 @@
       r.addEventListener('mouseleave', () => thumb.classList.remove('visible'));
     });
   }
-  // home page cards: every project that has a cover image
   function renderHome() {
     $('#home-grid').innerHTML = WORK.filter(w => w.img).map((w, i) =>
       `<a class="card" href="#work/${w.slug}" data-cursor="VIEW"><span class="card-img" style="--c:${w.color}"><img src="${w.img}" alt="${esc(w.name)}" loading="lazy"></span><span class="card-meta"><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="stamps">${cats(w).map(c => `<span class="stamp">${STAMPS[c]}</span>`).join('')}</span></span><span class="name">${esc(w.name)}</span><span class="card-text">${esc(w.problem)}</span></a>`).join('');
@@ -237,7 +197,7 @@
   $$('[data-filter]').forEach(a => a.addEventListener('click', () => { filter = a.dataset.filter; renderWork(); }));
 
   const thumb = $('#thumbnail-preview');
-  WORK.forEach(w => { if (w.img) new Image().src = w.img; }); // preload real images
+  WORK.forEach(w => { if (w.img) new Image().src = w.img; });
   function showThumb(e, w) {
     thumb.style.backgroundImage = w.img ? `url('${w.img}')` : 'none';
     thumb.style.backgroundColor = w.color;
@@ -258,7 +218,6 @@
   }
   const figmaSrc = url => 'https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(url);
 
-  /* ================= IMAGE GALLERY (lightbox) ================= */
   let galleries = [], lbState = null;
   const lb = document.createElement('div');
   lb.id = 'lightbox';
@@ -285,7 +244,7 @@
     lbCap.textContent = g.caption;
     lbCount.textContent = n > 1 ? `${lbState.i + 1} / ${n}` : '';
     lb.classList.toggle('single', n < 2);
-    [1, -1].forEach(d => { new Image().src = g.images[(lbState.i + d + n) % n]; }); // preload neighbours
+    [1, -1].forEach(d => { new Image().src = g.images[(lbState.i + d + n) % n]; });
   }
   function lbOpen(gi, i, trigger) {
     lbState = { g: galleries[gi], i, trigger };
@@ -305,11 +264,10 @@
     const b = e.target.closest('.gal-btn');
     if (b) lbOpen(+b.dataset.g, +b.dataset.i, b);
   });
-  $('.lb-scrim', lb).addEventListener('click', lbDismiss);   // click outside the image closes it
+  $('.lb-scrim', lb).addEventListener('click', lbDismiss);
   lbClose.addEventListener('click', lbDismiss);
   $('.lb-prev', lb).addEventListener('click', () => lbShow(lbState.i - 1));
   $('.lb-next', lb).addEventListener('click', () => lbShow(lbState.i + 1));
-  // capture phase, so Esc and the arrow keys never reach the page behind the gallery
   window.addEventListener('keydown', e => {
     if (!lbState) return;
     if (e.key === 'Escape') lbDismiss();
@@ -318,7 +276,7 @@
     else return;
     e.preventDefault(); e.stopImmediatePropagation();
   }, true);
-  let lbTouchX = null;   // swipe on touch screens
+  let lbTouchX = null;
   lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
   lb.addEventListener('touchend', e => {
     if (lbTouchX === null || !lbState) return;
@@ -355,7 +313,7 @@
       if (!src) return '';
       const ratio = b.ratio || (b.vimeo ? '16/9' : '16/10');
       const [rw, rh] = ratio.split('/').map(Number), r = (rw / (rh || 1)) || 16 / 9;
-      const maxW = b.width ? esc(b.width) : `min(100%, calc(min(60vh, 520px) * ${r.toFixed(4)}))`; // never taller than the cover image
+      const maxW = b.width ? esc(b.width) : `min(100%, calc(min(60vh, 520px) * ${r.toFixed(4)}))`;
       const style = `aspect-ratio:${ratio};max-width:${maxW}`;
       return `<figure class="case-fig reveal"><div class="embed" style="${style}"><iframe src="${src}" loading="lazy" allowfullscreen allow="fullscreen; picture-in-picture" title="${esc(b.caption || w.name)}"></iframe></div>${cap}</figure>`;
     }
@@ -371,7 +329,7 @@
   function renderCase(w) {
     galleries = [];
     const idx = WORK.indexOf(w), prev = WORK[(idx - 1 + WORK.length) % WORK.length], next = WORK[(idx + 1) % WORK.length];
-    const blocks = w.content || (w.process && w.process.length ? [{ images: w.process }] : null);
+    const blocks = w.content || null;
     const hero = (w.img && w.hero !== false) ? `<div class="ph hero-img"><img src="${w.img}" alt="${esc(w.name)}"></div>`
       : (blocks ? '' : `<div class="ph hero-img" style="--c:${w.color}">COVER IMAGE</div>`);
     const body = blocks ? blocks.map(b => renderBlock(b, w)).join('')
@@ -402,11 +360,10 @@
       if (window.ResizeObserver) new ResizeObserver(fit).observe(sp);
       size.addEventListener('input', () => set(size.value));
       $('.spec-reset', sp).addEventListener('click', () => { txt.textContent = sp.dataset.default; size.value = 72; set(72); });
-      txt.addEventListener('paste', e => { e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text')); });
+      txt.addEventListener('paste', e => { e.preventDefault(); document.execCommand('insertText', false, e.clipboardData.getData('text')); });
     });
   }
 
-  /* ================= ROUTER (hash based) ================= */
   const VIEWS = { work: 'Work', play: 'Play', about: 'About', contact: 'Contact' };
   const home = $('#home');
   const navEl = $('nav'), menuBtn = $('#menu-btn');
@@ -426,7 +383,7 @@
     if (key === current) return;
     current = key;
     setMenu(false);
-    if (currentView === 'play' && view !== 'play' && state === 'run') state = 'pause'; // auto-pause when leaving
+    if (currentView === 'play' && view !== 'play' && state === 'run') state = 'pause';
     currentView = view;
     const prev = $('.panel.active');
     $$('.panel.leaving').forEach(p => p.classList.remove('leaving'));
@@ -450,15 +407,12 @@
     route();
   });
 
-  /* ================= TETRIS ================= */
   const BS = 30, COLS = 10, ROWS = 20, POINTS = [0, 100, 300, 500, 800];
   const SHAPES = [[], [[1,1,1,1]], [[2,0,0],[2,2,2]], [[0,0,3],[3,3,3]], [[4,4],[4,4]], [[0,5,5],[5,5,0]], [[0,6,0],[6,6,6]], [[7,7,0],[0,7,7]]];
   const boardCv = $('#tetris-canvas'), nextCv = $('#next-canvas'), holdCv = $('#hold-canvas');
   const tCtx = boardCv.getContext('2d'), nCtx = nextCv.getContext('2d'), hCtx = holdCv.getContext('2d');
-  let cell = BS, lw = 2; // board cell size and block line width, in canvas pixels
+  let cell = BS, lw = 2;
 
-  /* Canvases are drawn at the size they are shown on screen (in device pixels), so every line
-     lands on whole pixels and nothing gets rescaled by the browser. */
   function sizeCanvases() {
     const d = Math.min(devicePixelRatio || 1, 3);
     const bw = boardCv.clientWidth * d || BS * COLS * Math.min(d, 2);
@@ -472,14 +426,13 @@
   const startBtn = $('#tetris-start-btn');
 
   let board, score = 0, lines = 0, level = 1, best = Number(store.get('tetris-best')) || 0;
-  let dropInterval = 1000, dropCounter = 0, state = 'idle'; // idle | run | pause | over
+  let dropInterval = 1000, dropCounter = 0, state = 'idle';
   let bag = [], nextIdx = 0, holdIdx = 0, canHold = true;
   const player = { x: 0, y: 0, m: null, shape: 0 };
   const emptyBoard = () => Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   board = emptyBoard();
   const running = () => state === 'run';
 
-  // 7-bag randomizer: every piece appears once per cycle
   function takeBag() {
     if (!bag.length) { bag = [1,2,3,4,5,6,7]; for (let i = 6; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [bag[i], bag[j]] = [bag[j], bag[i]]; } }
     return bag.pop();
@@ -521,7 +474,7 @@
   function rotate() {
     if (!running()) return;
     const m = player.m, r = m[0].map((_, i) => m.map(row => row[i]).reverse());
-    for (const dx of [0, -1, 1, -2, 2]) if (!collide(r, player.x + dx, player.y)) { player.m = r; player.x += dx; return; } // wall kicks; a failed rotation changes nothing
+    for (const dx of [0, -1, 1, -2, 2]) if (!collide(r, player.x + dx, player.y)) { player.m = r; player.x += dx; return; }
   }
   function softDrop() {
     if (!running()) return;
@@ -541,21 +494,17 @@
   }
   function ghostY() { let y = player.y; while (!collide(player.m, player.x, y + 1)) y++; return y; }
 
-  /* Block outlines sit on one shared lattice: every line is centred on a cell boundary, so a line
-     between two blocks and a line along the outside of a piece have the same thickness and meet
-     without a step, even at inner corners. Against the board walls the line stays inside the canvas. */
   function span(b, max, t) {
     if (max != null) { if (b <= 0) return [0, t]; if (b >= max) return [max - t, max]; }
     return [b - Math.ceil(t / 2), b + Math.floor(t / 2)];
   }
   function lineRects(R, c, s, t, W, H) {
     const x0 = span(c.x, W, t), x1 = span(c.x + s, W, t), y0 = span(c.y, H, t), y1 = span(c.y + s, H, t), nb = c.nb;
-    [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].forEach(([xs, ys]) => R.push([xs[0], ys[0], xs[1] - xs[0], ys[1] - ys[0]])); // corner points
+    [[x0, y0], [x1, y0], [x0, y1], [x1, y1]].forEach(([xs, ys]) => R.push([xs[0], ys[0], xs[1] - xs[0], ys[1] - ys[0]]));
     const midW = x1[0] - x0[1], midH = y1[0] - y0[1];
-    if (midW > 0) { R.push([x0[1], y0[0], midW, y0[1] - y0[0]]); if (!nb.b) R.push([x0[1], y1[0], midW, y1[1] - y1[0]]); } // top, bottom
-    if (midH > 0) { R.push([x0[0], y0[1], x0[1] - x0[0], midH]); if (!nb.r) R.push([x1[0], y0[1], x1[1] - x1[0], midH]); } // left, right
+    if (midW > 0) { R.push([x0[1], y0[0], midW, y0[1] - y0[0]]); if (!nb.b) R.push([x0[1], y1[0], midW, y1[1] - y1[0]]); }
+    if (midH > 0) { R.push([x0[0], y0[1], x0[1] - x0[0], midH]); if (!nb.r) R.push([x1[0], y0[1], x1[1] - x1[0], midH]); }
   }
-  // cells: [{x, y, idx, nb}]; all fills first, then all outlines as one path (so overlaps never double up)
   function paint(ctx, cells, s, t, alpha, W, H) {
     ctx.globalAlpha = alpha;
     cells.forEach(c => { ctx.fillStyle = theme.pieces[c.idx]; ctx.fillRect(c.x, c.y, s, s); });
@@ -574,7 +523,6 @@
   function draw() {
     const W = COLS * cell, H = ROWS * cell;
     tCtx.fillStyle = theme.bg; tCtx.fillRect(0, 0, W, H);
-    // background grid: one line per boundary, drawn as a single path so crossings don't double up
     const g = Math.max(1, Math.round(cell / BS));
     tCtx.strokeStyle = theme.grid; tCtx.lineWidth = g; tCtx.beginPath();
     for (let i = 1; i < COLS; i++) { const x = i * cell - Math.floor(g / 2) + g / 2; tCtx.moveTo(x, 0); tCtx.lineTo(x, H); }
@@ -617,7 +565,7 @@
   }
   function togglePause() { if (state === 'run') state = 'pause'; else if (state === 'pause') state = 'run'; else return; lastTime = performance.now(); draw(); }
 
-  const bind = (sel, fn) => $(sel).addEventListener('click', e => { fn(); e.currentTarget.blur(); draw(); }); // blur: stops Space re-pressing a focused button
+  const bind = (sel, fn) => $(sel).addEventListener('click', e => { fn(); e.currentTarget.blur(); draw(); });
   bind('#tetris-start-btn', startTetris); bind('#t-left', () => move(-1)); bind('#t-right', () => move(1));
   bind('#t-rot', rotate); bind('#t-drop', softDrop); bind('#t-hold', hold);
 
@@ -641,7 +589,6 @@
     else document.title = pageTitle;
   });
 
-  /* ================= CONTACT ================= */
   const copyBtn = $('#copy-email');
   copyBtn.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(EMAIL); }
@@ -649,7 +596,6 @@
     copyBtn.textContent = 'COPIED ✓'; setTimeout(() => copyBtn.textContent = 'COPY EMAIL', 1800);
   });
 
-  /* ================= LOOP (cursor + game only) ================= */
   let lastTime = performance.now();
   function frame(now) {
     const dt = Math.min(now - lastTime, 100); lastTime = now;
@@ -659,7 +605,6 @@
     requestAnimationFrame(frame);
   }
 
-  /* hero captions: slide a caption left if it would run past the page edge */
   function fitCap(v) {
     const cap = v.querySelector('.cap'); if (!cap) return;
     v.style.setProperty('--shift', '0px');
@@ -670,7 +615,6 @@
   }
   $$('.verb').forEach(v => ['mouseenter', 'focus'].forEach(ev => v.addEventListener(ev, () => fitCap(v))));
 
-  /* ================= INIT ================= */
   $('#year').textContent = new Date().getFullYear();
   const saved = store.get('theme');
   setTheme(THEMES.includes(saved) ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
@@ -678,7 +622,6 @@
   if (window.ResizeObserver) { const ro = new ResizeObserver(() => { sizeCanvases(); drawPreviews(); draw(); }); [boardCv, nextCv, holdCv].forEach(c => ro.observe(c)); }
   $$('.panel .reveal').forEach(el => { if (!el.closest('#case-body')) el.style.setProperty('--i', [...el.parentNode.children].indexOf(el)); });
   route();
-  // touch screens have no hover, so play the three hero effects once, one after another
   if (matchMedia('(hover: none)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     ['hold', 'fold', 'click'].forEach((v, i) => setTimeout(() => {
       const el = $('.verb.' + v); fitCap(el); el.classList.add('demo'); setTimeout(() => el.classList.remove('demo'), 1100);
